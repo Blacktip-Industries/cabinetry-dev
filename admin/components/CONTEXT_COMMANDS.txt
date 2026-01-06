@@ -1,0 +1,16 @@
+=====================================================================
+read CONTEXT.md for component /admin/components/COMPONENT_NAME
+update CONTEXT.md for component COMPONENT_NAME
+=====================================================================
+Show me all components that have pending tasks in their Next Steps
+=====================================================================
+
+
+
+
+
+read CONTEXT.md for component /admin/components/layout
+update CONTEXT.md for component layout
+
+read CONTEXT.md for component /admin/components/formula_builder
+update CONTEXT.md for component formula_builder

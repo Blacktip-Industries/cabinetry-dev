@@ -1,0 +1,170 @@
+/**
+ * Layout Component - Animation Timeline Editor Styles
+ */
+
+.timeline-editor {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #eee;
+}
+
+.timeline-header h3 {
+    margin: 0;
+}
+
+.btn-add-keyframe {
+    padding: 0.5rem 1rem;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-add-keyframe:hover {
+    background: #0056b3;
+}
+
+.timeline-canvas-container {
+    margin: 1rem 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #f8f9fa;
+}
+
+#timeline-canvas {
+    display: block;
+    width: 100%;
+    cursor: crosshair;
+}
+
+.timeline-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.keyframe-list {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 4px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.keyframe-list h4 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.keyframe-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.keyframe-item.selected {
+    background: #e7f3ff;
+    border-color: #007bff;
+}
+
+.keyframe-item button {
+    padding: 0.25rem 0.75rem;
+    background: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+.keyframe-item button:hover {
+    background: #5a6268;
+}
+
+.property-editor {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.property-editor h4 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.property-editor .form-group {
+    margin-bottom: 1rem;
+}
+
+.property-editor label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.property-editor input,
+.property-editor textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+.property-editor textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.btn-save-keyframe,
+.btn-delete-keyframe {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 0.5rem;
+}
+
+.btn-save-keyframe {
+    background: #28a745;
+    color: white;
+}
+
+.btn-save-keyframe:hover {
+    background: #218838;
+}
+
+.btn-delete-keyframe {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-delete-keyframe:hover {
+    background: #c82333;
+}
+
+@media (max-width: 768px) {
+    .timeline-controls {
+        grid-template-columns: 1fr;
+    }
+}
+

@@ -1,0 +1,1077 @@
+{
+  "meta": {
+    "name": "Bespoke Cabinetry Design System",
+    "version": "1.0.0",
+    "description": "Comprehensive design system guide for AI to follow when building new features in the Bespoke Cabinetry application. This file contains exact styling specifications, component definitions, and high-level design guidelines.",
+    "lastUpdated": "2024",
+    "targetAudience": "AI Development Agents",
+    "techStack": ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
+    "framework": "Vanilla (no frameworks required)"
+  },
+
+  "designPhilosophy": {
+    "overallStyle": "Modern, clean, professional admin dashboard with a warm and approachable aesthetic",
+    "corePrinciples": [
+      "Clarity over decoration - every element serves a purpose",
+      "Consistent spacing creates visual rhythm and hierarchy",
+      "Subtle shadows and borders define depth without heaviness",
+      "Warm color palette creates approachability while maintaining professionalism",
+      "Typography hierarchy guides user attention naturally",
+      "Generous white space prevents visual clutter",
+      "Rounded corners soften the interface and feel modern"
+    ],
+    "visualCharacteristics": [
+      "Light, airy backgrounds with subtle texture",
+      "Soft shadows for depth (not harsh or dramatic)",
+      "Rounded corners throughout (8px-12px typical)",
+      "Clean borders when needed (often subtle or transparent)",
+      "Icon-driven navigation with clear labels",
+      "Card-based content organization",
+      "Consistent color coding for status and actions"
+    ],
+    "userExperience": {
+      "interaction": "Smooth transitions (0.2s ease) on all interactive elements",
+      "feedback": "Clear visual feedback on hover, focus, and active states",
+      "accessibility": "WCAG AA compliant, keyboard navigable, screen reader friendly",
+      "responsive": "Mobile-first approach with breakpoints at 576px, 768px, 992px, 1200px, 1400px"
+    }
+  },
+
+  "colorSystem": {
+    "primary": {
+      "main": "#ff6c2f",
+      "rgb": "255, 108, 47",
+      "description": "Warm orange - primary action color, creates energy and warmth",
+      "usage": "Primary buttons, active states, links, important highlights",
+      "hover": "#d95c28",
+      "subtle": "#ffe2d5",
+      "borderSubtle": "#ffc4ac",
+      "textEmphasis": "#662b13",
+      "contrast": "White text on primary meets WCAG AA"
+    },
+    "secondary": {
+      "main": "#5d7186",
+      "rgb": "93, 113, 134",
+      "description": "Muted blue-gray - secondary text and elements",
+      "usage": "Secondary buttons, body text, icons, borders",
+      "subtle": "#dfe3e7",
+      "borderSubtle": "#bec6cf",
+      "textEmphasis": "#252d36"
+    },
+    "success": {
+      "main": "#22c55e",
+      "rgb": "34, 197, 94",
+      "description": "Fresh green - success states, positive actions",
+      "usage": "Success messages, completed status, positive indicators",
+      "subtle": "#d3f3df",
+      "borderSubtle": "#a7e8bf",
+      "textEmphasis": "#0e4f26"
+    },
+    "danger": {
+      "main": "#ef5f5f",
+      "rgb": "239, 95, 95",
+      "description": "Soft red - errors, warnings, destructive actions",
+      "usage": "Error messages, delete actions, cancelled status",
+      "subtle": "#fcdfdf",
+      "borderSubtle": "#f9bfbf",
+      "textEmphasis": "#602626"
+    },
+    "warning": {
+      "main": "#f9b931",
+      "rgb": "249, 185, 49",
+      "description": "Warm yellow - warnings, attention needed",
+      "usage": "Warning messages, pending status, caution indicators",
+      "subtle": "#fef1d6",
+      "borderSubtle": "#fde3ad",
+      "textEmphasis": "#644a14"
+    },
+    "info": {
+      "main": "#4ecac2",
+      "rgb": "78, 202, 194",
+      "description": "Cyan - informational elements",
+      "usage": "Info messages, informational badges, neutral indicators",
+      "subtle": "#dcf4f3",
+      "borderSubtle": "#b8eae7",
+      "textEmphasis": "#1f514e"
+    },
+    "neutral": {
+      "white": "#ffffff",
+      "gray100": "#f8f9fa",
+      "gray200": "#eef2f7",
+      "gray300": "#d8dfe7",
+      "gray400": "#b0b0bb",
+      "gray500": "#8486a7",
+      "gray600": "#5d7186",
+      "gray700": "#424e5a",
+      "gray800": "#36404a",
+      "gray900": "#323a46",
+      "black": "#000000",
+      "usage": {
+        "gray100": "Hover states, subtle backgrounds",
+        "gray200": "Light backgrounds, dividers",
+        "gray300": "Borders, disabled states",
+        "gray400": "Placeholder text, icons",
+        "gray500": "Muted text, secondary information",
+        "gray600": "Body text, secondary elements",
+        "gray700": "Headings, emphasis",
+        "gray800-900": "Dark backgrounds, high contrast text"
+      }
+    },
+    "backgrounds": {
+      "body": "#f9f7f7",
+      "description": "Warm off-white - main background, creates softness",
+      "card": "#ffffff",
+      "topbar": "#f9f7f7",
+      "sidebar": "#262d34",
+      "input": "#eae8e8",
+      "search": "#eae8e8"
+    },
+    "text": {
+      "primary": {
+        "value": "#313b5e",
+        "usage": "Headings, important text"
+      },
+      "secondary": {
+        "value": "#5d7186",
+        "usage": "Body text, descriptions"
+      },
+      "tertiary": {
+        "value": "#424e5a",
+        "usage": "Subheadings, emphasis"
+      },
+      "muted": {
+        "value": "#707793",
+        "usage": "Helper text, timestamps, less important information"
+      },
+      "emphasis": "rgba(93, 113, 134, 0.75)",
+      "onPrimary": "#ffffff",
+      "onDark": "#ffffff"
+    },
+    "borders": {
+      "default": "#eaedf1",
+      "description": "Very light gray - subtle separation",
+      "input": "#d8dfe7",
+      "inputFocus": "#b0b0bb",
+      "nav": "#2f3944"
+    },
+    "semantic": {
+      "link": "#8486a7",
+      "linkHover": "#d95c28",
+      "valid": "#22c55e",
+      "invalid": "#ef5f5f"
+    }
+  },
+
+  "typography": {
+    "fontFamily": {
+      "primary": "\"Play\", sans-serif",
+      "description": "Modern, friendly sans-serif - main typeface",
+      "fallback": "sans-serif",
+      "googleFonts": "https://fonts.googleapis.com/css2?family=Play:wght@400;500;600;700&display=swap",
+      "monospace": "SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
+      "usage": "Code snippets, technical values"
+    },
+    "scale": {
+      "base": {
+        "size": "14px",
+        "lineHeight": "21px",
+        "weight": "400",
+        "description": "Base body text - comfortable reading size",
+        "usage": "All body text, paragraphs, default text"
+      },
+      "h1": {
+        "size": "2.5rem",
+        "lineHeight": "1.2",
+        "weight": "600",
+        "color": "#313b5e",
+        "marginBottom": "16px",
+        "usage": "Page titles, main headings"
+      },
+      "h2": {
+        "size": "2rem",
+        "lineHeight": "1.3",
+        "weight": "600",
+        "color": "#313b5e",
+        "marginBottom": "16px",
+        "usage": "Section titles, major headings"
+      },
+      "h3": {
+        "size": "1.75rem",
+        "lineHeight": "1.4",
+        "weight": "600",
+        "color": "#313b5e",
+        "marginBottom": "16px",
+        "usage": "Subsection titles"
+      },
+      "h4": {
+        "size": "1.5rem",
+        "lineHeight": "1.4",
+        "weight": "600",
+        "color": "#313b5e",
+        "marginBottom": "16px",
+        "usage": "Card titles, minor headings"
+      },
+      "h5": {
+        "size": "1.25rem",
+        "lineHeight": "1.5",
+        "weight": "600",
+        "color": "#313b5e",
+        "marginBottom": "16px",
+        "usage": "Small headings, labels"
+      },
+      "h6": {
+        "size": "1rem",
+        "lineHeight": "1.5",
+        "weight": "400",
+        "color": "#5d7186",
+        "marginBottom": "16px",
+        "usage": "Subtle headings, captions"
+      },
+      "small": {
+        "size": "12px",
+        "lineHeight": "1.5",
+        "weight": "400",
+        "usage": "Helper text, timestamps, fine print"
+      },
+      "caption": {
+        "size": "10px",
+        "lineHeight": "1.4",
+        "weight": "600",
+        "usage": "Badges, labels, tiny text"
+      }
+    },
+    "weights": {
+      "regular": "400",
+      "medium": "500",
+      "semibold": "600",
+      "bold": "700"
+    },
+    "rules": [
+      "Always use the primary font family for all text",
+      "Maintain consistent line heights (1.5 for body, tighter for headings)",
+      "Use font weights sparingly - prefer size and color for hierarchy",
+      "Never use font sizes smaller than 10px",
+      "Ensure sufficient contrast (WCAG AA minimum)"
+    ]
+  },
+
+  "spacing": {
+    "scale": {
+      "xs": "4px",
+      "sm": "8px",
+      "md": "12px",
+      "lg": "16px",
+      "xl": "24px",
+      "2xl": "32px",
+      "3xl": "48px",
+      "4xl": "64px"
+    },
+    "componentPadding": {
+      "card": "24px",
+      "button": {
+        "small": "4px 8px",
+        "medium": "6px 12px",
+        "large": "8px 16px"
+      },
+      "input": "8px 15px 8px 40px",
+      "tableCell": "13.6px 13.6px 13.6px 24px",
+      "alert": "12px 20px",
+      "badge": "3px 6px"
+    },
+    "layout": {
+      "containerPadding": "24px",
+      "sectionSpacing": "24px",
+      "elementGap": "16px",
+      "formFieldGap": "16px",
+      "cardMargin": "0 0 24px"
+    },
+    "rules": [
+      "Use spacing scale consistently - never arbitrary values",
+      "Maintain 24px spacing between major sections",
+      "Use 16px gap between form fields",
+      "Cards should have 24px internal padding",
+      "Maintain consistent margins between cards (24px)"
+    ]
+  },
+
+  "layout": {
+    "structure": {
+      "sidebar": {
+        "width": "280px",
+        "widthSmall": "75px",
+        "backgroundColor": "#262d34",
+        "textColor": "#9097a7",
+        "activeColor": "#ffffff",
+        "itemPadding": "10px 25px",
+        "itemFontSize": "15px",
+        "iconSize": "22px",
+        "borderColor": "#2f3944"
+      },
+      "topbar": {
+        "height": "100px",
+        "backgroundColor": "#f9f7f7",
+        "padding": "0 0 0 280px",
+        "textColor": "#5d7186"
+      },
+      "content": {
+        "padding": "24px",
+        "backgroundColor": "#f9f7f7",
+        "maxWidth": "none"
+      },
+      "footer": {
+        "height": "60px",
+        "backgroundColor": "#ffffff",
+        "textColor": "#5d7186"
+      }
+    },
+    "breakpoints": {
+      "xs": "0px",
+      "sm": "576px",
+      "md": "768px",
+      "lg": "992px",
+      "xl": "1200px",
+      "xxl": "1400px",
+      "usage": "Mobile-first responsive design"
+    },
+    "grid": {
+      "columns": "12",
+      "gutter": "24px",
+      "containerMaxWidth": "1400px"
+    },
+    "responsiveRules": [
+      "Design mobile-first, then enhance for larger screens",
+      "Use breakpoints consistently across all components",
+      "Sidebar collapses to 75px on mobile",
+      "Grid columns stack on mobile (1 column)",
+      "Cards maintain padding but may stack vertically"
+    ]
+  },
+
+  "components": {
+    "button": {
+      "base": {
+        "display": "inline-block",
+        "fontFamily": "\"Play\", sans-serif",
+        "borderRadius": "8px",
+        "border": "none",
+        "cursor": "pointer",
+        "transition": "all 0.2s ease",
+        "textDecoration": "none",
+        "outline": "none"
+      },
+      "primary": {
+        "backgroundColor": "#ff6c2f",
+        "color": "#ffffff",
+        "borderRadius": "8px",
+        "padding": "6px 12px",
+        "fontSize": "12.6px",
+        "fontWeight": "400",
+        "border": "0.8px solid #ff6c2f",
+        "boxShadow": "none",
+        "hover": {
+          "backgroundColor": "#d95c28",
+          "borderColor": "#d95c28"
+        },
+        "focus": {
+          "ringColor": "rgba(255, 108, 47, 0.25)",
+          "ringWidth": "0.15rem",
+          "boxShadow": "0 0 0 0.15rem rgba(255, 108, 47, 0.25)"
+        },
+        "active": {
+          "backgroundColor": "#d95c28",
+          "transform": "scale(0.98)"
+        },
+        "disabled": {
+          "opacity": "0.6",
+          "cursor": "not-allowed"
+        }
+      },
+      "secondary": {
+        "backgroundColor": "transparent",
+        "color": "#5d7186",
+        "borderRadius": "8px",
+        "padding": "6px 12px",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "border": "1px solid #eaedf1",
+        "hover": {
+          "backgroundColor": "#f8f9fa"
+        },
+        "focus": {
+          "ringColor": "rgba(93, 113, 134, 0.25)",
+          "ringWidth": "0.15rem",
+          "boxShadow": "0 0 0 0.15rem rgba(93, 113, 134, 0.25)"
+        }
+      },
+      "sizes": {
+        "small": {
+          "padding": "4px 8px",
+          "fontSize": "12px"
+        },
+        "medium": {
+          "padding": "6px 12px",
+          "fontSize": "14px"
+        },
+        "large": {
+          "padding": "8px 16px",
+          "fontSize": "16px"
+        }
+      },
+      "usage": {
+        "primary": "Main actions, confirmations, primary CTAs",
+        "secondary": "Secondary actions, cancel buttons, less important actions",
+        "sizes": "Use small for compact spaces, medium for standard, large for prominent actions"
+      },
+      "htmlExample": "<button class=\"btn btn-primary btn-medium\">Click Me</button>"
+    },
+    "card": {
+      "base": {
+        "backgroundColor": "#ffffff",
+        "borderRadius": "12px",
+        "padding": "24px",
+        "margin": "0 0 24px",
+        "boxShadow": "0px 3px 4px 0px rgba(0, 0, 0, 0.03)",
+        "border": "0px solid #eaedf1"
+      },
+      "variants": {
+        "default": {
+          "boxShadow": "0px 3px 4px 0px rgba(0, 0, 0, 0.03)"
+        },
+        "elevated": {
+          "boxShadow": "0 5px 10px rgba(30, 32, 37, 0.12)"
+        },
+        "outlined": {
+          "border": "1px solid #eaedf1",
+          "boxShadow": "none"
+        }
+      },
+      "usage": "Container for related content, sections, data displays",
+      "htmlExample": "<div class=\"card\"><h4 class=\"card-title\">Title</h4><p>Content</p></div>"
+    },
+    "input": {
+      "base": {
+        "width": "100%",
+        "backgroundColor": "#eae8e8",
+        "color": "#5d7186",
+        "borderRadius": "8px",
+        "padding": "8px 15px 8px 40px",
+        "border": "0px",
+        "fontSize": "14px",
+        "fontFamily": "\"Play\", sans-serif",
+        "transition": "all 0.2s ease"
+      },
+      "states": {
+        "default": {
+          "backgroundColor": "#eae8e8",
+          "border": "0px"
+        },
+        "focus": {
+          "borderColor": "#b0b0bb",
+          "outline": "none",
+          "boxShadow": "0 0 0 0.15rem rgba(255, 108, 47, 0.25)"
+        },
+        "error": {
+          "border": "1px solid #ef5f5f",
+          "backgroundColor": "#fcdfdf"
+        },
+        "success": {
+          "border": "1px solid #22c55e",
+          "backgroundColor": "#d3f3df"
+        },
+        "disabled": {
+          "opacity": "0.6",
+          "cursor": "not-allowed"
+        }
+      },
+      "placeholder": {
+        "color": "#8486a7"
+      },
+      "label": {
+        "display": "block",
+        "marginBottom": "8px",
+        "fontWeight": "500",
+        "color": "#313b5e"
+      },
+      "helperText": {
+        "fontSize": "12px",
+        "color": "#707793",
+        "marginTop": "4px"
+      },
+      "errorText": {
+        "fontSize": "12px",
+        "color": "#ef5f5f",
+        "marginTop": "4px"
+      },
+      "usage": "Text inputs, search fields, form fields",
+      "htmlExample": "<div class=\"input-group\"><label class=\"input-label\">Label</label><input type=\"text\" class=\"input\" placeholder=\"Enter text...\"></div>"
+    },
+    "colorPicker": {
+      "base": {
+        "size": "50px",
+        "width": "50px",
+        "height": "50px",
+        "padding": "2px",
+        "borderRadius": "8px",
+        "cursor": "pointer",
+        "border": "0px",
+        "backgroundColor": "transparent"
+      },
+      "settings": {
+        "defaultSize": "50px",
+        "minSize": "20px",
+        "maxSize": "100px",
+        "settingKey": "--color-picker-size",
+        "settingLocation": "Settings > Parameters > Color Picker > --color-picker-size"
+      },
+      "hexInput": {
+        "container": {
+          "display": "flex",
+          "gap": "var(--spacing-sm)",
+          "alignItems": "center"
+        },
+        "width": {
+          "method": "Dynamic resizing based on content width + 20px",
+          "implementation": "Use JavaScript function resizeColorInput() to measure text width and set input width dynamically",
+          "formula": "Input width = content width + 20px",
+          "minWidth": "80px (minimum for usability)",
+          "description": "Hex input width must be dynamically resized based on actual content length, not fixed widths. Width is calculated as content width + 20px for better usability. This accommodates both short hex codes (#RRGGBB) and longer rgba strings (rgba(255, 255, 255, 0.15)) automatically. The resizeColorInput() function measures the text width using a temporary span element and sets the input width accordingly."
+        }
+      },
+      "synchronization": {
+        "colorPickerToHex": "When color picker value changes, automatically update the hex input field",
+        "hexToColorPicker": "When valid hex code (format: #RRGGBB) is typed in hex input, automatically update the color picker",
+        "implementation": "Use onchange event on color picker and oninput event on hex input with regex validation"
+      },
+      "usage": "Color selection in settings forms, theme customization, design tools",
+      "htmlExample": {
+        "hexOnly": "<div style=\"display: flex; gap: var(--spacing-sm); align-items: center;\"><input type=\"color\" id=\"color_picker\" style=\"width: 50px; height: 50px; padding: 2px; cursor: pointer; border-radius: var(--radius-md);\" onchange=\"document.getElementById('hex_input').value = this.value;\"><input type=\"text\" id=\"hex_input\" class=\"input color-picker-hex-input\" placeholder=\"#f5f5f5\" oninput=\"var hexMatch = this.value.match(/^#([0-9A-Fa-f]{6})$/); if (hexMatch) { document.getElementById('color_picker').value = this.value; } resizeColorInput(this);\" onfocus=\"resizeColorInput(this);\"></div>",
+        "hexOrRgba": "<div style=\"display: flex; gap: var(--spacing-sm); align-items: center;\"><input type=\"color\" id=\"color_picker\" style=\"width: 50px; height: 50px; padding: 2px; cursor: pointer; border-radius: var(--radius-md);\" onchange=\"document.getElementById('hex_input').value = this.value;\"><input type=\"text\" id=\"hex_input\" class=\"input color-picker-hex-input\" placeholder=\"#ffffff or rgba(255, 255, 255, 0.15)\" oninput=\"var hexMatch = this.value.match(/^#([0-9A-Fa-f]{6})$/); if (hexMatch) { document.getElementById('color_picker').value = this.value; } resizeColorInput(this);\" onfocus=\"resizeColorInput(this);\"></div>",
+        "javascriptFunction": "function resizeColorInput(input) { const temp = document.createElement('span'); temp.style.visibility = 'hidden'; temp.style.position = 'absolute'; temp.style.whiteSpace = 'nowrap'; temp.style.fontSize = window.getComputedStyle(input).fontSize; temp.style.fontFamily = window.getComputedStyle(input).fontFamily; temp.style.fontWeight = window.getComputedStyle(input).fontWeight; temp.style.padding = window.getComputedStyle(input).padding; temp.style.border = window.getComputedStyle(input).border; const text = input.value || input.placeholder || '#000000'; temp.textContent = text; document.body.appendChild(temp); const width = temp.offsetWidth; document.body.removeChild(temp); input.style.width = (width + 20) + 'px'; input.style.minWidth = '80px'; }"
+      },
+      "notes": [
+        "Default size is 50px x 50px, configurable via Settings > Layout > Color Picker Size",
+        "Always include a hex input field next to the color picker for manual entry",
+        "Ensure bidirectional synchronization between color picker and hex input",
+        "Use flexbox layout with gap spacing for proper alignment",
+        "Apply border-radius: var(--radius-md) for consistent rounded corners",
+        "Hex input width MUST be restricted based on content length - NEVER use flex: 1 or width: 100%",
+        "Hex input width: Dynamically resize to content width + 20px using resizeColorInput() JavaScript function",
+        "Implementation: Add class 'color-picker-hex-input' to input, call resizeColorInput(this) on oninput and onfocus events",
+        "Width calculation: Input width = measured content width + 20px (minimum 80px for usability)",
+        "Benefits: Automatically accommodates both short hex codes (#RRGGBB) and longer rgba strings without fixed width constraints",
+        "Validate hex format (#RRGGBB) before updating color picker from text input",
+        "Color picker size should use the --color-picker-size parameter value dynamically"
+      ],
+      "layoutRequirements": {
+        "container": "Use flexbox with gap: var(--spacing-sm) and align-items: center",
+        "colorPicker": "Use width and height from --color-picker-size parameter, apply border-radius: var(--radius-md)",
+        "hexInputWidth": {
+          "requirement": "Width must be dynamically resized based on content width + 20px",
+          "method": "JavaScript function resizeColorInput() measures text width and sets input width",
+          "formula": "Input width = content width + 20px",
+          "minWidth": "80px (minimum for usability)",
+          "rationale": "Prevents input field from taking full width, keeps layout compact and professional. Dynamic resizing accommodates both short hex codes (#RRGGBB) and longer rgba strings automatically. The +20px padding provides comfortable spacing for user input.",
+          "implementation": "Add class 'color-picker-hex-input' to input, call resizeColorInput(this) on oninput and onfocus events, include resizeColorInput() function in page script"
+        }
+      }
+    },
+    "table": {
+      "importantNote": "For all future table layouts, use the table structure pattern established in the footer links and social media links tables (admin/settings/footer.php). This pattern includes: proper HTML table structure with <table>, <thead>, <tbody>, <tr>, <th>, and <td> elements; use of getTableElementBorderStyle() and getTableCellBorderStyle() helper functions for consistent borders; use of getTableCellPadding() helper function for consistent cell padding; table-layout: fixed for consistent column widths; explicit width percentages for each column. This structure ensures better alignment, easier troubleshooting of layout issues, and consistent styling across all tables in the application.",
+      "base": {
+        "width": "100%",
+        "backgroundColor": "transparent",
+        "borderCollapse": "collapse",
+        "fontSize": "14px"
+      },
+      "header": {
+        "backgroundColor": "transparent",
+        "color": "#5d7186",
+        "fontWeight": "600",
+        "padding": "13.6px 13.6px 13.6px 24px",
+        "textAlign": "left"
+      },
+      "cell": {
+        "backgroundColor": "transparent",
+        "color": "#5d7186",
+        "padding": "13.6px 13.6px 13.6px 24px",
+        "border": "none"
+      },
+      "row": {
+        "hover": {
+          "backgroundColor": "#f8f9fa"
+        }
+      },
+      "striped": {
+        "evenRows": {
+          "backgroundColor": "#f8f9fa"
+        }
+      },
+      "usage": "Data tables, lists, tabular data",
+      "htmlExample": "<table class=\"table\"><thead><tr><th>Header</th></tr></thead><tbody><tr><td>Data</td></tr></tbody></table>"
+    },
+    "badge": {
+      "base": {
+        "display": "inline-block",
+        "padding": "3px 6px",
+        "fontSize": "10px",
+        "fontWeight": "600",
+        "borderRadius": "800px",
+        "color": "#ffffff"
+      },
+      "variants": {
+        "primary": {
+          "backgroundColor": "#ff6c2f",
+          "color": "#ffffff"
+        },
+        "success": {
+          "backgroundColor": "#22c55e",
+          "color": "#ffffff"
+        },
+        "danger": {
+          "backgroundColor": "#ef5f5f",
+          "color": "#ffffff"
+        },
+        "warning": {
+          "backgroundColor": "#f9b931",
+          "color": "#ffffff"
+        },
+        "info": {
+          "backgroundColor": "#4ecac2",
+          "color": "#ffffff"
+        },
+        "secondary": {
+          "backgroundColor": "#5d7186",
+          "color": "#ffffff"
+        }
+      },
+      "usage": "Status indicators, labels, counts, tags",
+      "htmlExample": "<span class=\"badge badge-success\">Active</span>"
+    },
+    "alert": {
+      "base": {
+        "borderRadius": "12px",
+        "padding": "12px 20px",
+        "border": "0px",
+        "marginBottom": "16px"
+      },
+      "variants": {
+        "primary": {
+          "backgroundColor": "#ffe2d5",
+          "color": "#662b13",
+          "borderColor": "#ffc4ac"
+        },
+        "success": {
+          "backgroundColor": "#d3f3df",
+          "color": "#0e4f26",
+          "borderColor": "#a7e8bf"
+        },
+        "danger": {
+          "backgroundColor": "#fcdfdf",
+          "color": "#602626",
+          "borderColor": "#f9bfbf"
+        },
+        "warning": {
+          "backgroundColor": "#fef1d6",
+          "color": "#644a14",
+          "borderColor": "#fde3ad"
+        },
+        "info": {
+          "backgroundColor": "#dcf4f3",
+          "color": "#1f514e",
+          "borderColor": "#b8eae7"
+        }
+      },
+      "usage": "Notifications, messages, feedback",
+      "htmlExample": "<div class=\"alert alert-success\"><strong>Success:</strong> Operation completed!</div>"
+    },
+    "navigation": {
+      "sidebar": {
+        "backgroundColor": "#262d34",
+        "itemColor": "#9097a7",
+        "itemHoverColor": "#ffffff",
+        "itemHoverBackground": "transparent",
+        "itemPadding": "10px 25px",
+        "itemFontSize": "15px",
+        "itemIconSize": "22px",
+        "activeIndicator": "left border 3px solid #ff6c2f",
+        "borderColor": "#2f3944"
+      },
+      "breadcrumb": {
+        "color": "#5d7186",
+        "activeColor": "#313b5e",
+        "separator": "/",
+        "fontSize": "14px",
+        "separatorMargin": "0 8px"
+      },
+      "usage": "Main navigation, page hierarchy, navigation paths"
+    },
+    "avatar": {
+      "sizes": {
+        "small": "32px",
+        "medium": "40px",
+        "large": "56px"
+      },
+      "base": {
+        "borderRadius": "50%",
+        "border": "2px solid #ffffff",
+        "display": "inline-block",
+        "textAlign": "center",
+        "lineHeight": "1",
+        "overflow": "hidden",
+        "backgroundColor": "#d8dfe7"
+      },
+      "usage": "User profiles, user indicators, profile pictures"
+    },
+    "dropdown": {
+      "base": {
+        "backgroundColor": "#ffffff",
+        "borderRadius": "8px",
+        "boxShadow": "0 5px 10px rgba(30, 32, 37, 0.12)",
+        "padding": "8px 0",
+        "minWidth": "200px"
+      },
+      "item": {
+        "padding": "8px 16px",
+        "color": "#5d7186",
+        "cursor": "pointer",
+        "transition": "background-color 0.2s ease"
+      },
+      "itemHover": {
+        "backgroundColor": "#f8f9fa"
+      },
+      "usage": "Menus, options, actions"
+    },
+    "modal": {
+      "overlay": {
+        "backgroundColor": "rgba(0, 0, 0, 0.5)",
+        "backdrop": "blur(2px)",
+        "position": "fixed",
+        "top": "0",
+        "left": "0",
+        "right": "0",
+        "bottom": "0",
+        "zIndex": "1000"
+      },
+      "content": {
+        "backgroundColor": "#ffffff",
+        "borderRadius": "12px",
+        "boxShadow": "0 5px 10px rgba(30, 32, 37, 0.12)",
+        "padding": "24px",
+        "maxWidth": "600px",
+        "margin": "auto",
+        "position": "relative",
+        "top": "50%",
+        "transform": "translateY(-50%)"
+      },
+      "usage": "Dialogs, confirmations, forms, detailed views"
+    },
+    "pagination": {
+      "item": {
+        "padding": "6px 12px",
+        "borderRadius": "8px",
+        "color": "#5d7186",
+        "cursor": "pointer",
+        "transition": "all 0.2s ease"
+      },
+      "active": {
+        "backgroundColor": "#ff6c2f",
+        "color": "#ffffff"
+      },
+      "hover": {
+        "backgroundColor": "#f8f9fa"
+      },
+      "usage": "Page navigation, list pagination"
+    },
+    "status": {
+      "completed": {
+        "color": "#22c55e",
+        "icon": "checkmark"
+      },
+      "processing": {
+        "color": "#f9b931",
+        "icon": "clock"
+      },
+      "pending": {
+        "color": "#5d7186",
+        "icon": "hourglass"
+      },
+      "cancelled": {
+        "color": "#ef5f5f",
+        "icon": "x"
+      },
+      "usage": "Status indicators, progress states"
+    }
+  },
+
+  "effects": {
+    "shadows": {
+      "sm": "0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)",
+      "default": "0px 3px 4px 0px rgba(0, 0, 0, 0.03)",
+      "lg": "0 5px 10px rgba(30, 32, 37, 0.12)",
+      "inset": "inset 0 1px 2px rgba(0, 0, 0, 0.075)",
+      "description": "Subtle shadows for depth - never harsh or dramatic",
+      "usage": {
+        "sm": "Subtle elevation",
+        "default": "Cards, containers",
+        "lg": "Modals, dropdowns, elevated elements"
+      }
+    },
+    "borderRadius": {
+      "sm": "0.5rem",
+      "default": "0.75rem",
+      "md": "8px",
+      "lg": "1rem",
+      "xl": "1.25rem",
+      "2xl": "2rem",
+      "pill": "50rem",
+      "full": "50%",
+      "description": "Rounded corners throughout - 8px-12px most common",
+      "usage": {
+        "md": "Buttons, inputs",
+        "default": "Cards",
+        "pill": "Badges, tags",
+        "full": "Avatars, circular elements"
+      }
+    },
+    "transitions": {
+      "default": "0.2s ease",
+      "fast": "0.15s ease",
+      "slow": "0.3s ease",
+      "properties": ["background-color", "color", "border-color", "transform", "opacity"],
+      "usage": "All interactive elements should have smooth transitions"
+    },
+    "focus": {
+      "ringWidth": "0.15rem",
+      "ringColor": "rgba(255, 108, 47, 0.25)",
+      "ringOffset": "2px",
+      "description": "Subtle focus rings for accessibility",
+      "implementation": "box-shadow: 0 0 0 0.15rem rgba(255, 108, 47, 0.25)"
+    }
+  },
+
+  "icons": {
+    "style": "Line icons or filled icons with consistent stroke width",
+    "sizes": {
+      "xs": "12px",
+      "sm": "16px",
+      "md": "22px",
+      "lg": "24px",
+      "xl": "32px"
+    },
+    "color": "Inherit from parent or use semantic colors",
+    "spacing": "4-8px from text when inline",
+    "usage": "Navigation, actions, status indicators, decorative elements"
+  },
+
+  "patterns": {
+    "statCard": {
+      "description": "Dashboard metric cards",
+      "layout": "Icon + Title + Value + Change indicator",
+      "spacing": "Generous padding (24px), clear hierarchy",
+      "background": "White card with subtle shadow",
+      "icon": "Large, colored icon (semantic or primary color)",
+      "value": "Large, bold number",
+      "change": "Small percentage with up/down indicator",
+      "htmlStructure": "<div class=\"card\"><div class=\"stat-card\"><icon/><h4>Title</h4><h2>Value</h2><span>Change</span></div></div>"
+    },
+    "activityFeed": {
+      "description": "Timeline of activities",
+      "layout": "Avatar + Content + Timestamp",
+      "spacing": "Vertical list with consistent gaps (16px)",
+      "timestamp": "Small (12px), muted text",
+      "avatar": "Circular, 40px typical"
+    },
+    "dataTable": {
+      "description": "Tabular data display",
+      "layout": "Clean rows, minimal borders",
+      "header": "Bold (600), gray text (#5d7186)",
+      "rows": "Hover state (#f8f9fa) for interactivity",
+      "actions": "Icon buttons or text links",
+      "pagination": "Bottom right or centered"
+    },
+    "form": {
+      "description": "Form layouts",
+      "layout": "Vertical stacking",
+      "labels": "Above inputs, medium weight (500)",
+      "inputs": "Full width, rounded corners (8px)",
+      "helpText": "Below inputs, small (12px), muted (#707793)",
+      "errors": "Red text (#ef5f5f), below input",
+      "spacing": "16px between fields",
+      "submitButton": "Primary button, full width or right-aligned"
+    },
+    "dashboard": {
+      "description": "Main dashboard layout",
+      "layout": "Grid-based, responsive columns",
+      "cards": "White cards with subtle shadows",
+      "spacing": "24px between cards",
+      "charts": "White background, minimal styling",
+      "metrics": "Large numbers, clear labels"
+    },
+    "pageHeader": {
+      "description": "Page title and actions",
+      "layout": "Title on left, actions on right",
+      "title": "H2 or H3, primary text color",
+      "actions": "Button group, right-aligned",
+      "breadcrumb": "Above title, muted text"
+    }
+  },
+
+  "accessibility": {
+    "colorContrast": {
+      "minimum": "WCAG AA compliant",
+      "textOnPrimary": "White on #ff6c2f meets contrast",
+      "textOnBackground": "Dark gray on light background",
+      "requirements": "4.5:1 for normal text, 3:1 for large text"
+    },
+    "focusStates": {
+      "requirement": "Visible focus rings on all interactive elements",
+      "implementation": "box-shadow: 0 0 0 0.15rem rgba(255, 108, 47, 0.25)",
+      "elements": ["buttons", "links", "inputs", "selects", "checkboxes", "radio buttons"]
+    },
+    "keyboardNavigation": {
+      "requirement": "All interactive elements keyboard accessible",
+      "tabOrder": "Logical tab order",
+      "skipLinks": "Skip to main content links"
+    },
+    "ariaLabels": {
+      "requirement": "Icons and interactive elements have descriptive labels",
+      "examples": ["aria-label on icon buttons", "aria-describedby for form fields", "aria-live for dynamic content"]
+    },
+    "semanticHTML": {
+      "requirement": "Use semantic HTML elements",
+      "examples": ["<nav> for navigation", "<main> for main content", "<article> for content sections", "<button> not <div> for buttons"]
+    }
+  },
+
+  "implementationGuidelines": {
+    "cssVariables": {
+      "recommendation": "Use CSS custom properties for all design tokens for easy theming",
+      "prefix": "--color-, --bg-, --text-, --spacing-, --shadow-, --radius-",
+      "example": ":root { --color-primary: #ff6c2f; }"
+    },
+    "responsive": {
+      "approach": "Mobile-first approach",
+      "breakpoints": "576px, 768px, 992px, 1200px, 1400px",
+      "mediaQueries": "@media (min-width: 768px) { /* styles */ }"
+    },
+    "techStack": {
+      "languages": ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
+      "frameworks": "None - vanilla implementation",
+      "cssMethodology": "BEM or similar naming convention recommended"
+    },
+    "fileStructure": {
+      "recommendation": "Organize CSS by component",
+      "example": "styles/components/button.css, styles/components/card.css"
+    },
+    "performance": {
+      "shadows": "Minimize shadows and effects",
+      "animations": "Use CSS transforms for animations",
+      "images": "Optimize images, use appropriate formats",
+      "fonts": "Load fonts efficiently, use font-display: swap"
+    },
+    "browserSupport": {
+      "target": "Modern browsers (last 2 versions)",
+      "fallback": "Graceful degradation for older browsers"
+    },
+    "namingConventions": {
+      "css": "BEM methodology recommended: .block__element--modifier",
+      "classes": "kebab-case: .btn-primary, .card-title",
+      "ids": "Use sparingly, prefer classes"
+    },
+    "hexColorStandardization": {
+      "requirement": "ALL HEX color codes must be stored in UPPERCASE format",
+      "standard": "Format: #RRGGBB (uppercase letters)",
+      "implementation": "The upsertParameter() and updateParameter() functions automatically normalize HEX codes to uppercase",
+      "example": "#ff6c2f → #FF6C2F",
+      "pattern": "Only 6-digit HEX codes with # prefix are normalized: /^#[0-9A-Fa-f]{6}$/",
+      "note": "Always use uppercase HEX codes in setup scripts and parameter creation for consistency"
+    },
+    "setupScriptStandards": {
+      "requirement": "All setup scripts must follow standardized formatting",
+      "format": "HTML output with professional styling, step-by-step execution tracking, visual status indicators",
+      "successColor": "Green: background #d4edda, text #155724",
+      "errorColor": "Red: background #f8d7da, text #721c24",
+      "requirements": [
+        "Display each step on a separate row with status (Success/Fail)",
+        "Show step number, step name, and status indicator",
+        "Include clickable navigation links to relevant pages",
+        "Use consistent color scheme for visual feedback",
+        "Handle errors gracefully with try-catch blocks"
+      ],
+      "example": "See admin/setup/add-bg-secondary-parameter.php for complete template"
+    }
+  },
+
+  "aiGuidelines": {
+    "whenBuildingNewFeatures": {
+      "1": "Always reference this design-system.json file for exact styling values",
+      "2": "Use the color system - never invent new colors",
+      "3": "Follow spacing scale - use predefined spacing values (xs, sm, md, lg, xl, etc.)",
+      "4": "Maintain typography hierarchy - use defined heading and text sizes",
+      "5": "Apply consistent border radius - 8px for buttons/inputs, 12px for cards",
+      "6": "Use component patterns - follow existing patterns for similar features",
+      "7": "Ensure accessibility - add focus states, ARIA labels, semantic HTML",
+      "8": "Make responsive - mobile-first, test at all breakpoints",
+      "9": "Use transitions - 0.2s ease for interactive elements",
+      "10": "Follow shadow guidelines - subtle shadows only, use defined shadow values",
+      "11": "Normalize HEX colors to UPPERCASE - all HEX codes must be stored as #RRGGBB (uppercase)",
+      "12": "Follow setup script standards - use step-by-step execution with visual status indicators"
+    },
+    "componentCreation": {
+      "step1": "Check if similar component exists in components section",
+      "step2": "Use base styles from existing components as foundation",
+      "step3": "Apply color system values, never hardcode colors",
+      "step4": "Use spacing scale for margins and padding",
+      "step5": "Add hover, focus, and active states",
+      "step6": "Ensure responsive behavior",
+      "step7": "Add accessibility features (ARIA, keyboard navigation)",
+      "step8": "Test with design system colors and spacing"
+    },
+    "commonMistakes": {
+      "avoid": [
+        "Using arbitrary color values - always use color system",
+        "Hardcoding spacing values - use spacing scale",
+        "Creating new font sizes - use typography scale",
+        "Using harsh shadows - keep shadows subtle",
+        "Forgetting hover/focus states",
+        "Ignoring mobile responsiveness",
+        "Missing accessibility features",
+        "Inconsistent border radius values",
+        "Using lowercase HEX codes - always use UPPERCASE (#FF6C2F not #ff6c2f)",
+        "Creating setup scripts without step-by-step status display"
+      ]
+    },
+    "codeExamples": {
+      "button": {
+        "html": "<button class=\"btn btn-primary btn-medium\">Action</button>",
+        "css": ".btn { padding: 6px 12px; border-radius: 8px; transition: all 0.2s ease; }"
+      },
+      "card": {
+        "html": "<div class=\"card\"><h4 class=\"card-title\">Title</h4><p>Content</p></div>",
+        "css": ".card { background: #ffffff; padding: 24px; border-radius: 12px; box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.03); }"
+      },
+      "input": {
+        "html": "<div class=\"input-group\"><label class=\"input-label\">Label</label><input type=\"text\" class=\"input\" placeholder=\"Enter text...\"></div>",
+        "css": ".input { background: #eae8e8; padding: 8px 15px 8px 40px; border-radius: 8px; border: 0px; }"
+      }
+    }
+  },
+
+  "validationChecklist": {
+    "beforeSubmitting": [
+      "All colors match color system values",
+      "Spacing uses predefined scale (xs, sm, md, lg, xl, etc.)",
+      "Typography follows defined scale",
+      "Border radius is 8px (buttons/inputs) or 12px (cards)",
+      "Shadows are subtle and use defined values",
+      "Transitions are 0.2s ease on interactive elements",
+      "Focus states are visible and use primary color ring",
+      "Hover states are defined for interactive elements",
+      "Responsive at all breakpoints",
+      "Accessibility features included (ARIA, keyboard nav)",
+      "Semantic HTML used",
+      "No hardcoded colors or spacing values"
+    ]
+  }
+}
+

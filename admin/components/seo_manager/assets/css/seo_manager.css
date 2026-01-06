@@ -1,0 +1,56 @@
+/* SEO Manager Component Styles */
+
+.seo-manager-dashboard {
+    padding: var(--spacing-lg);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+}
+
+.stat-card {
+    background: var(--color-primary);
+    color: var(--text-on-primary);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-sm);
+}
+
+.stat-card h3 {
+    margin: 0 0 var(--spacing-sm) 0;
+    font-size: var(--font-size-small);
+    opacity: 0.9;
+}
+
+.stat-value {
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
+    margin: 0;
+}
+
+.quick-actions {
+    margin-top: var(--spacing-xl);
+}
+
+.quick-actions h2 {
+    margin-bottom: var(--spacing-md);
+}
+
+.btn {
+    display: inline-block;
+    padding: var(--spacing-button-py) var(--spacing-button-px);
+    background: var(--color-primary);
+    color: var(--text-on-primary);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    margin-right: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    transition: opacity var(--transition-default);
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+

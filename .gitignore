@@ -1,0 +1,104 @@
+# XAMPP-specific
+xampp/
+htdocs/
+*.log
+
+# PHP
+*.php~
+*.swp
+*.swo
+*~
+.htaccess.local
+.htpasswd
+php.ini.local
+
+# Sessions
+sessions/
+tmp/
+
+# IDE - VSCode
+.vscode/
+*.code-workspace
+
+# IDE - PhpStorm
+.idea/
+*.iml
+
+# IDE - Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# OS - Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# OS - macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# OS - Linux
+*~
+.directory
+
+# Environment/Config files with sensitive data
+.env
+.env.local
+.env.*.local
+config/database.local.php
+*.key
+*.pem
+*.cert
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+
+# Database dumps
+*.sql.gz
+*.sql.bak
+admin/backups/database/*.sql
+admin/backups/filesystem/*
+
+# Composer
+/vendor/
+composer.phar
+composer.lock
+
+# Node modules (if any)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build artifacts
+dist/
+build/
+*.min.js
+*.min.css
+
+# Cache
+cache/
+*.cache
+
+# Logs
+logs/
+*.log
+
+# Backup files
+backups/
+*.backup
+pre-implementation-backup.php
+
+# Design system temporary files
+design-system/preview-temp/
+
+# Code library dev (if temporary)
+code-library-dev/temp/
+

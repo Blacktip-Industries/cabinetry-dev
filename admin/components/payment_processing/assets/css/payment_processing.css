@@ -1,0 +1,161 @@
+/**
+ * Payment Processing Component - Main CSS
+ * Component-specific styles using theme variables
+ */
+
+/* Use theme variables with fallbacks */
+:root {
+    --payment-processing-color-primary: var(--color-primary, #007bff);
+    --payment-processing-color-success: var(--color-success, #28a745);
+    --payment-processing-color-danger: var(--color-danger, #dc3545);
+    --payment-processing-color-warning: var(--color-warning, #ffc107);
+    --payment-processing-spacing-sm: var(--spacing-sm, 8px);
+    --payment-processing-spacing-md: var(--spacing-md, 16px);
+    --payment-processing-spacing-lg: var(--spacing-lg, 24px);
+    --payment-processing-border-radius: var(--border-radius-md, 8px);
+    --payment-processing-bg-card: var(--bg-card, #ffffff);
+}
+
+/* Transaction Status Badges */
+.payment_processing__status {
+    display: inline-block;
+    padding: var(--payment-processing-spacing-sm) var(--payment-processing-spacing-md);
+    border-radius: var(--payment-processing-border-radius);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.payment_processing__status--pending {
+    background-color: var(--payment-processing-color-warning);
+    color: #000;
+}
+
+.payment_processing__status--processing {
+    background-color: var(--payment-processing-color-primary);
+    color: #fff;
+}
+
+.payment_processing__status--completed {
+    background-color: var(--payment-processing-color-success);
+    color: #fff;
+}
+
+.payment_processing__status--failed {
+    background-color: var(--payment-processing-color-danger);
+    color: #fff;
+}
+
+/* Transaction Cards */
+.payment_processing__transaction-card {
+    background: var(--payment-processing-bg-card);
+    border-radius: var(--payment-processing-border-radius);
+    padding: var(--payment-processing-spacing-lg);
+    margin-bottom: var(--payment-processing-spacing-md);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.payment_processing__transaction-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--payment-processing-spacing-md);
+}
+
+.payment_processing__transaction-amount {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--payment-processing-color-primary);
+}
+
+/* Dashboard Stats */
+.payment_processing__stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--payment-processing-spacing-md);
+    margin-bottom: var(--payment-processing-spacing-lg);
+}
+
+.payment_processing__stat-card {
+    background: var(--payment-processing-bg-card);
+    border-radius: var(--payment-processing-border-radius);
+    padding: var(--payment-processing-spacing-lg);
+    text-align: center;
+}
+
+.payment_processing__stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--payment-processing-color-primary);
+    margin-bottom: var(--payment-processing-spacing-sm);
+}
+
+.payment_processing__stat-label {
+    color: #666;
+    font-size: 0.875rem;
+}
+
+/* Forms */
+.payment_processing__form-group {
+    margin-bottom: var(--payment-processing-spacing-md);
+}
+
+.payment_processing__form-label {
+    display: block;
+    margin-bottom: var(--payment-processing-spacing-sm);
+    font-weight: 500;
+}
+
+.payment_processing__form-input {
+    width: 100%;
+    padding: var(--payment-processing-spacing-sm);
+    border: 1px solid #ddd;
+    border-radius: var(--payment-processing-border-radius);
+}
+
+.payment_processing__form-button {
+    background: var(--payment-processing-color-primary);
+    color: #fff;
+    border: none;
+    padding: var(--payment-processing-spacing-sm) var(--payment-processing-spacing-lg);
+    border-radius: var(--payment-processing-border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.payment_processing__form-button:hover {
+    opacity: 0.9;
+}
+
+.payment_processing__form-button--danger {
+    background: var(--payment-processing-color-danger);
+}
+
+.payment_processing__form-button--success {
+    background: var(--payment-processing-color-success);
+}
+
+/* Tables */
+.payment_processing__table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--payment-processing-bg-card);
+    border-radius: var(--payment-processing-border-radius);
+    overflow: hidden;
+}
+
+.payment_processing__table th,
+.payment_processing__table td {
+    padding: var(--payment-processing-spacing-md);
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.payment_processing__table th {
+    background: #f8f9fa;
+    font-weight: 600;
+}
+
+.payment_processing__table tr:hover {
+    background: #f8f9fa;
+}
+

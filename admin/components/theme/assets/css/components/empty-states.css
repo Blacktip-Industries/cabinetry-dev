@@ -1,0 +1,29 @@
+/* Theme Component - Empty States */
+
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-4xl) var(--spacing-xl);
+}
+
+.empty-state-icon {
+  font-size: var(--empty-state-icon-size);
+  color: var(--text-muted);
+  margin-bottom: var(--spacing-lg);
+}
+
+.empty-state-title {
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.empty-state-description {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+}
+
+.empty-state-action {
+  margin-top: var(--spacing-lg);
+}
+

@@ -1,0 +1,4 @@
+ask question in a popup and mark which letter you recommend.
+when adding the stars "GOOD=1", "BETTER=2", "BEST=3"
+display the best choice as option A and then down in rank.
+make all options selectable.

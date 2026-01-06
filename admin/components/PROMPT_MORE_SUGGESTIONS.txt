@@ -1,0 +1,6 @@
+do you have anymore questions or suggestions to further improve it?
+add more detail to each option so I can make better decision I prefer more advanced options giving more flexibility (best versatility).
+ask question in a popup and mark which letter you recommend.
+when adding the stars "GOOD=1", "BETTER=2", "BEST=3" add them to the beginning of the row
+display the best choice as option A and then down in rank.
+make all options selectable.

@@ -1,0 +1,7 @@
+We are going to create a component component_name in folder /admin/components/component_name
+
+database table names component_name_*
+
+This is an advanced component that will interface with the other components that are located in /admin/components/ and needs to be highly configurable.
+
+Make suggestions, recommendations and ask questions so we can get this as advanced and customisable as possible.

@@ -1,0 +1,43 @@
+/* Theme Component - Cards */
+
+.card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-default);
+  padding: var(--spacing-card-padding);
+  margin: 0 0 var(--spacing-xl);
+  box-shadow: var(--shadow-default);
+  border: 0 solid var(--border-color);
+}
+
+.card-elevated {
+  box-shadow: var(--shadow-lg);
+}
+
+.card-outlined {
+  border: var(--border-width) solid var(--border-default);
+  box-shadow: none;
+}
+
+.card-header {
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: var(--border-width) solid var(--border-color);
+}
+
+.card-title {
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: 0;
+}
+
+.card-body {
+  /* Card body content */
+}
+
+.card-footer {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: var(--border-width) solid var(--border-color);
+}
+

@@ -1,0 +1,121 @@
+/**
+ * Commerce Component - Main Stylesheet
+ * Component-specific styles
+ */
+
+/* Commerce Component Variables */
+:root {
+    /* These will be overridden by variables.css during installation */
+    --commerce-button-primary-bg: var(--color-primary, #007bff);
+    --commerce-button-primary-text: var(--color-white, #ffffff);
+    --commerce-card-bg: var(--bg-card, #ffffff);
+    --commerce-border-radius: var(--border-radius-md, 8px);
+}
+
+/* Product Styles */
+.commerce__product {
+    background: var(--commerce-card-bg);
+    border-radius: var(--commerce-border-radius);
+    padding: var(--spacing-md, 16px);
+    margin-bottom: var(--spacing-md, 16px);
+}
+
+.commerce__product-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: var(--spacing-sm, 8px);
+}
+
+.commerce__product-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-primary, #007bff);
+}
+
+/* Cart Styles */
+.commerce__cart {
+    background: var(--commerce-card-bg);
+    border-radius: var(--commerce-border-radius);
+    padding: var(--spacing-md, 16px);
+}
+
+.commerce__cart-item {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-sm, 8px) 0;
+    border-bottom: 1px solid var(--border-color, #dee2e6);
+}
+
+.commerce__cart-total {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-top: var(--spacing-md, 16px);
+    padding-top: var(--spacing-md, 16px);
+    border-top: 2px solid var(--border-color, #dee2e6);
+}
+
+/* Checkout Styles */
+.commerce__checkout-form {
+    background: var(--commerce-card-bg);
+    border-radius: var(--commerce-border-radius);
+    padding: var(--spacing-lg, 24px);
+}
+
+.commerce__checkout-section {
+    margin-bottom: var(--spacing-lg, 24px);
+}
+
+.commerce__checkout-section-title {
+    font-size: 1.125rem;
+    font-weight: bold;
+    margin-bottom: var(--spacing-md, 16px);
+}
+
+/* Bulk Order Table Styles */
+.commerce__bulk-order-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--commerce-card-bg);
+    border-radius: var(--commerce-border-radius);
+    overflow: hidden;
+}
+
+.commerce__bulk-order-table th,
+.commerce__bulk-order-table td {
+    padding: var(--spacing-sm, 8px);
+    border: 1px solid var(--border-color, #dee2e6);
+    text-align: left;
+}
+
+.commerce__bulk-order-table th {
+    background: var(--bg-secondary, #f8f9fa);
+    font-weight: bold;
+}
+
+.commerce__bulk-order-table input {
+    width: 100%;
+    padding: var(--spacing-xs, 4px);
+    border: 1px solid var(--border-color, #dee2e6);
+    border-radius: var(--border-radius-sm, 4px);
+}
+
+/* Buttons */
+.commerce__button {
+    background: var(--commerce-button-primary-bg);
+    color: var(--commerce-button-primary-text);
+    border: none;
+    padding: var(--spacing-sm, 8px) var(--spacing-md, 16px);
+    border-radius: var(--commerce-border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: opacity 0.2s;
+}
+
+.commerce__button:hover {
+    opacity: 0.9;
+}
+
+.commerce__button--secondary {
+    background: var(--color-secondary, #6c757d);
+}
+

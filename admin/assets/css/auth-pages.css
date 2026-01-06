@@ -1,0 +1,119 @@
+/* Auth Pages Styles (Forgot Password, Help) */
+/* Extends admin.css design system */
+
+.forgot-password-page,
+.help-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-body);
+    padding: var(--spacing-xl);
+}
+
+.forgot-password-card,
+.help-card {
+    width: 100%;
+    max-width: 420px;
+    background-color: var(--bg-card);
+    border-radius: var(--radius-default);
+    padding: var(--spacing-3xl);
+    box-shadow: var(--shadow-default);
+}
+
+.help-card {
+    max-width: 600px;
+}
+
+.forgot-password-logo,
+.help-logo {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+}
+
+.forgot-password-logo h1,
+.help-logo h1 {
+    font-size: 2rem;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.forgot-password-logo p,
+.help-logo p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.forgot-password-form__group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.forgot-password-form__label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 500;
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.forgot-password-form__input {
+    width: 100%;
+    background-color: var(--bg-input);
+    color: var(--text-secondary);
+    border-radius: var(--radius-md);
+    padding: 8px 15px 8px 40px;
+    border: 0;
+    font-size: 14px;
+    font-family: var(--font-primary);
+    transition: all var(--transition-default);
+}
+
+.forgot-password-form__input:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.15rem var(--focus-ring-color);
+    background-color: #ffffff;
+}
+
+.forgot-password-form__input-group {
+    position: relative;
+}
+
+.forgot-password-form__icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: var(--text-muted);
+}
+
+.forgot-password-form__submit {
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+}
+
+.forgot-password-links,
+.help-links {
+    text-align: center;
+    font-size: 14px;
+    margin-top: var(--spacing-xl);
+}
+
+.forgot-password-links a,
+.help-links a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color var(--transition-default);
+    margin: 0 var(--spacing-sm);
+}
+
+.forgot-password-links a:hover,
+.help-links a:hover {
+    color: var(--link-hover);
+}
+
+.help-content {
+    text-align: center;
+}
+

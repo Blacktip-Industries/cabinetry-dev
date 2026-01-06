@@ -1,0 +1,43 @@
+/**
+ * URL Routing Component - Styles
+ */
+
+.routes-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.routes-table {
+    font-size: 14px;
+}
+
+.routes-table th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.badge {
+    margin-right: 5px;
+}
+
+.btn {
+    margin-right: 5px;
+}
+
+.modal-content {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 5px;
+    color: #6c757d;
+    font-size: 12px;
+}
+
+.test-url {
+    font-size: 12px;
+}
+

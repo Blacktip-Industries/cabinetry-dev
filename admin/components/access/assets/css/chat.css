@@ -1,0 +1,184 @@
+/* Access Component - Chat Styles */
+
+.access-chat .chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    border: var(--border-width) solid var(--border-default);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.access-chat .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-lg);
+    background-color: var(--bg-card);
+}
+
+.access-chat .chat-message {
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-sm);
+}
+
+.access-chat .chat-message.message-user {
+    background-color: var(--color-primary-subtle);
+    margin-left: 20%;
+}
+
+.access-chat .chat-message.message-admin {
+    background-color: var(--bg-hover);
+    margin-right: 20%;
+}
+
+.access-chat .message-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-size-small);
+}
+
+.access-chat .message-header strong {
+    color: var(--text-primary);
+}
+
+.access-chat .message-time {
+    color: var(--text-secondary);
+    font-size: var(--font-size-caption);
+}
+
+.access-chat .message-content {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.access-chat .chat-input-container {
+    border-top: var(--border-width) solid var(--border-default);
+    padding: var(--spacing-lg);
+    background-color: var(--bg-hover);
+}
+
+.access-chat .chat-input-wrapper {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.access-chat .chat-input-wrapper textarea {
+    flex: 1;
+    resize: vertical;
+    min-height: 60px;
+}
+
+.access-chat .chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: var(--border-width) solid var(--border-default);
+}
+
+.access-chat .chat-header-info h1 {
+    margin: 0 0 0.5rem 0;
+}
+
+.access-chat .chat-meta {
+    display: flex;
+    gap: var(--spacing-lg);
+    font-size: var(--font-size-small);
+    color: var(--text-secondary);
+}
+
+.access-chat .chat-stats {
+    display: flex;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.access-chat .stat-card {
+    flex: 1;
+    padding: var(--spacing-lg);
+    background-color: var(--bg-hover);
+    border-radius: var(--radius-sm);
+    text-align: center;
+}
+
+.access-chat .stat-value {
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+}
+
+.access-chat .stat-label {
+    color: var(--text-secondary);
+    font-size: var(--font-size-small);
+}
+
+.access-chat .chat-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.access-chat .chat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg);
+    background-color: var(--bg-hover);
+    border-radius: var(--radius-sm);
+}
+
+.access-chat .chat-item h3 {
+    margin: 0 0 0.25rem 0;
+}
+
+.access-chat .chat-item small {
+    color: var(--text-secondary);
+}
+
+.access-chat .access-table tr.chat-waiting {
+    background-color: var(--color-warning-subtle);
+}
+
+.access-chat .notifications-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.access-chat .notification-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg);
+    background-color: var(--bg-hover);
+    border-radius: var(--radius-sm);
+    border-left: var(--border-width-thick) solid var(--border-default);
+}
+
+.access-chat .notification-item.unread {
+    border-left-color: var(--color-primary);
+    background-color: var(--color-primary-subtle);
+}
+
+.access-chat .notification-content h3 {
+    margin: 0 0 0.5rem 0;
+}
+
+.access-chat .notification-content p {
+    margin: 0 0 var(--spacing-xs) 0;
+    color: var(--text-secondary);
+}
+
+.access-chat .notification-content small {
+    color: var(--text-secondary);
+    font-size: var(--font-size-small);
+}
+
+.access-chat .notification-actions {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+

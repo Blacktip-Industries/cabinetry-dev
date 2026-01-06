@@ -1,0 +1,247 @@
+/* Menu System Component CSS
+ * Uses standardized CSS variables that map to base system with fallbacks
+ */
+
+/* Component CSS Variables - Use theme variables directly where possible */
+/* Component-specific variables are loaded from database via variables.css */
+
+/* Sidebar Navigation Styles */
+.menu-system-sidebar__nav {
+    padding: var(--spacing-lg) 0;
+}
+
+.menu-system-sidebar__menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-system-sidebar__item {
+    margin-bottom: 0;
+}
+
+.menu-system-sidebar__item--active {
+    background-color: transparent !important;
+}
+
+.menu-system-sidebar__link {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: var(--font-size-base);
+    transition: all var(--transition-default);
+    border-left: var(--border-width-thick) solid transparent;
+    position: relative;
+}
+
+.menu-system-sidebar__link:hover {
+    color: var(--text-on-dark);
+    background-color: transparent;
+}
+
+.menu-system-sidebar__item--active .menu-system-sidebar__link {
+    color: var(--menu-system-menu-active-text-color);
+    border-left-color: transparent !important;
+    background-color: transparent !important;
+}
+
+.menu-system-sidebar__icon {
+    width: var(--menu-system-icon-size);
+    height: var(--menu-system-icon-size);
+    margin-left: 0;
+    margin-right: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.menu-system-sidebar__icon svg {
+    width: var(--menu-system-icon-size);
+    height: var(--menu-system-icon-size);
+}
+
+.menu-system-sidebar__text {
+    flex: 1;
+}
+
+.menu-system-sidebar__submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: var(--menu-system-submenu-bg);
+    padding-left: 0;
+}
+
+.menu-system-sidebar__subitem {
+    margin-bottom: var(--spacing-xs);
+}
+
+.menu-system-sidebar__sublink {
+    display: block;
+    padding: var(--spacing-sm) var(--spacing-xl) var(--spacing-sm) 0;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: var(--font-size-small);
+    transition: all var(--transition-default);
+    text-align: left;
+    border-left: var(--border-width-thick) solid transparent;
+}
+
+.menu-system-sidebar__sublink:hover {
+    color: var(--text-on-dark);
+}
+
+.menu-system-sidebar__subitem--active {
+    background-color: transparent !important;
+}
+
+.menu-system-sidebar__subitem--active .menu-system-sidebar__sublink {
+    color: var(--menu-system-menu-active-text-color);
+    font-weight: var(--font-weight-medium);
+    border-left-color: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Sidebar Container */
+.menu-system-sidebar {
+    width: var(--menu-system-menu-width);
+    background-color: var(--menu-system-menu-bg-color);
+    min-height: 0;
+    height: 100%;
+    overflow-y: auto;
+    z-index: var(--z-index-sticky);
+    transition: all var(--transition-default);
+}
+
+/* Section Heading Styles */
+.menu-system-sidebar__section-heading {
+    /* Styles applied inline from parameters */
+}
+
+.menu-system-sidebar__section-heading-text {
+    /* Styles applied inline from parameters */
+}
+
+/* Responsive Styles */
+@media (max-width: var(--breakpoint-lg)) {
+    .menu-system-sidebar {
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: var(--menu-system-menu-width);
+        transform: translateX(-100%);
+        z-index: var(--z-index-modal);
+    }
+    
+    .menu-system-sidebar.show {
+        transform: translateX(0);
+    }
+}
+
+/* Collapsed State */
+.menu-system-sidebar.collapsed {
+    width: var(--menu-system-menu-width-collapsed);
+}
+
+.menu-system-sidebar.collapsed .menu-system-sidebar__text {
+    display: none;
+}
+
+.menu-system-sidebar.collapsed .menu-system-sidebar__link {
+    justify-content: center;
+    padding: var(--spacing-md);
+}
+
+.menu-system-sidebar.collapsed .menu-system-sidebar__icon {
+    margin-right: 0;
+}
+
+/* Compatibility: Also support admin-sidebar class names for base system integration */
+.admin-sidebar {
+    /* Inherit from menu-system-sidebar if component is integrated */
+}
+
+.admin-sidebar__nav,
+.menu-system-sidebar__nav {
+    padding: var(--spacing-lg) 0;
+}
+
+.admin-sidebar__menu,
+.menu-system-sidebar__menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.admin-sidebar__item,
+.menu-system-sidebar__item {
+    margin-bottom: 0;
+}
+
+.admin-sidebar__link,
+.menu-system-sidebar__link {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: var(--font-size-base);
+    transition: all var(--transition-default);
+}
+
+/* Icon Picker Styles */
+.icon-picker-wrapper {
+    position: relative;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.icon-picker-button {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-sm) var(--spacing-md);
+    min-height: auto;
+    box-sizing: border-box;
+    background: var(--bg-card);
+    border: var(--border-width) solid var(--border-default);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+}
+
+.icon-picker-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-card);
+    border: var(--border-width) solid var(--border-default);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    max-height: var(--menu-system-icon-picker-max-height);
+    overflow-y: auto;
+    z-index: var(--z-index-dropdown);
+    margin-top: var(--spacing-xs);
+    padding: var(--spacing-sm);
+}
+
+.icon-picker-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-sm);
+    cursor: pointer;
+    transition: background-color var(--transition-default);
+    border-radius: var(--radius-sm);
+}
+
+.icon-picker-option:hover {
+    background-color: var(--bg-hover);
+}

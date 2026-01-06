@@ -1,0 +1,36 @@
+/* Theme Component - Tables */
+
+.table {
+  width: 100%;
+  background-color: transparent;
+  border-collapse: collapse;
+  font-size: var(--font-size-base);
+}
+
+.table thead {
+  background-color: transparent;
+}
+
+.table th {
+  background-color: transparent;
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--spacing-table-cell-vertical) var(--spacing-table-cell-vertical) var(--spacing-table-cell-vertical) var(--spacing-table-cell-horizontal);
+  text-align: left;
+}
+
+.table td {
+  background-color: transparent;
+  color: var(--text-secondary);
+  padding: var(--spacing-table-cell-vertical) var(--spacing-table-cell-vertical) var(--spacing-table-cell-vertical) var(--spacing-table-cell-horizontal);
+  border: none;
+}
+
+.table tbody tr:hover {
+  background-color: var(--bg-hover);
+}
+
+.table-striped tbody tr:nth-child(even) {
+  background-color: var(--bg-hover);
+}
+

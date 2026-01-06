@@ -1,0 +1,41 @@
+/* Theme Component - Progress */
+
+.progress {
+  width: 100%;
+  height: var(--progress-height);
+  background-color: var(--color-gray-200);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-pill);
+  transition: width var(--transition-default);
+}
+
+.progress-bar-success {
+  background-color: var(--color-success);
+}
+
+.progress-bar-danger {
+  background-color: var(--color-danger);
+}
+
+.progress-bar-warning {
+  background-color: var(--color-warning);
+}
+
+.progress-bar-info {
+  background-color: var(--color-info);
+}
+
+.progress-sm {
+  height: var(--progress-height-sm);
+}
+
+.progress-lg {
+  height: var(--progress-height-lg);
+}
+

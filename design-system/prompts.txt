@@ -1,0 +1,14 @@
+Deeply analyse the design of the attached screenshot to create a design.json file in this project that describes the style and design of every UI component needed in a design system at a high level like a creative director. Capture high level guidelines for structure, spacing, fonts, colours, design style and design principles so I can use this file as the design guidelines for my app. The goal with this file is to instruct AI to be able to replicate this look easily in this project. The final website will be designed using vanilla system (HTML, CSS, JavaScript, PHP, MySQL)
+
+===============
+
+Let's create a simple dashboard screen for a bespoke cabinetry manufacturing company following the design style outlined in @design.json . Build this using HTML, CSS, JavaScript, PHP and MySQL. Then run this locally.
+
+===============
+
+In this project create a folder named 'design' and create a design-system.json file in this folder that outlines the exact styling for all components and styles in this app along with high level design guidelines. The goal with the file is to create a comprehensive guide for AI to follow when builing new features in this app.
+
+#########################
+CURRENT AGENT PROMPT
+#########################
+

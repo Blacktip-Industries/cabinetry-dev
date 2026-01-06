@@ -1,0 +1,138 @@
+/* Login Page Specific Styles */
+/* Extends admin.css design system */
+
+/* Ensure SVG icons are properly sized */
+svg.login-form__icon {
+    width: 16px !important;
+    height: 16px !important;
+    max-width: 16px;
+    max-height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-body);
+    padding: var(--spacing-xl);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    background-color: var(--bg-card);
+    border-radius: var(--radius-default);
+    padding: var(--spacing-3xl);
+    box-shadow: var(--shadow-default);
+}
+
+.login-logo {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+}
+
+.login-logo h1 {
+    font-size: 2rem;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.login-logo p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.login-form__group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.login-form__label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 500;
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.login-form__input {
+    width: 100%;
+    background-color: var(--bg-input);
+    color: var(--text-secondary);
+    border-radius: var(--radius-md);
+    padding: 8px 15px 8px 40px;
+    border: 0;
+    font-size: 14px;
+    font-family: var(--font-primary);
+    transition: all var(--transition-default);
+}
+
+.login-form__input:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.15rem var(--focus-ring-color);
+    background-color: #ffffff;
+}
+
+.login-form__input-group {
+    position: relative;
+}
+
+.login-form__icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px !important;
+    height: 16px !important;
+    max-width: 16px;
+    max-height: 16px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.login-form__checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.login-form__checkbox {
+    margin-right: var(--spacing-sm);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.login-form__checkbox-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.login-form__submit {
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+}
+
+.login-links {
+    text-align: center;
+    font-size: 14px;
+}
+
+.login-links a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color var(--transition-default);
+}
+
+.login-links a:hover {
+    color: var(--link-hover);
+}
+
+.login-links__divider {
+    margin: 0 var(--spacing-sm);
+    color: var(--text-muted);
+}
+

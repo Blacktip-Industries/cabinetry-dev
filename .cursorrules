@@ -1,0 +1,200 @@
+# Cursor Rules - Development Standards
+
+## Required Documentation References
+
+**ALWAYS reference these documents when creating or modifying code:**
+
+1. **Component Creation Procedure**: `_standards/COMPONENT_CREATION_PROCEDURE.md` or `admin/components/COMPONENT_CREATION_PROCEDURE.md`
+2. **Naming Standards**: `_standards/NAMING_STANDARDS.md` or `admin/components/NAMING_STANDARDS.md`
+
+**These apply to:**
+- ✅ Component development
+- ✅ Standalone page development  
+- ✅ All PHP, CSS, JavaScript, and database code
+- ✅ All files in this project
+
+---
+
+## Universal Naming Rules (All Code)
+
+### Files
+- **PHP**: `lowercase_with_underscores.php`
+- **CSS**: `{name}.css`
+- **JavaScript**: `{name}.js`
+- **Markdown**: `UPPERCASE_WITH_UNDERSCORES.md`
+
+### Functions
+- **Format**: `{prefix}_{action}_{object}()`
+- **Component**: `{component}_{action}_{object}()`
+- **Standalone Page**: `{page}_{action}_{object}()`
+- **Example**: `user_dashboard_get_stats()`, `menu_system_get_menus()`
+
+### Variables
+- **PHP**: `$lowercase_with_underscores`
+- **CSS Theme**: `--{category}-{property}` (e.g., `--color-primary`)
+- **CSS Component/Page**: `--{component_name}-{property}` (convert underscores to hyphens, only if truly specific)
+- **JavaScript**: `camelCase`
+
+### Database
+- **Tables**: `{prefix}_{table_name}`
+- **Columns**: `lowercase_with_underscores`
+- **Indexes**: `idx_{descriptive_name}`
+
+### CSS Classes
+- **Format**: `{prefix}__{element}--{modifier}` (BEM-like)
+- **Component**: `{component}__{element}--{modifier}`
+- **Standalone**: `{page}__{element}--{modifier}`
+- **Example**: `.menu_system__item--active`, `.user_dashboard__card--featured`
+
+---
+
+## CSS Standards (All Code)
+
+### Required Practices
+- **NO hardcoded colors** - Always use: `var(--color-primary)`
+- **NO hardcoded spacing** - Always use: `var(--spacing-lg)`
+- **NO hardcoded borders** - Always use: `var(--border-radius-md)`
+- Use theme variables when available
+- Document component/page-specific variables in `css-settings.php`
+
+### Component CSS Settings
+- Components with CSS MUST have: `admin/components/{component}/admin/css-settings.php`
+- Include variable mapping interface
+- Include live preview
+- Allow mapping to theme variables or custom values
+
+### Validation
+- Run CSS audit: `php admin/tools/css-audit.php {component_name}`
+- Minimum 70% compliance score required
+- CSS linter runs during component installation
+
+---
+
+## Code Quality Standards (All Code)
+
+### Security
+- Use prepared statements for ALL database queries
+- Validate ALL user input
+- Sanitize ALL output
+- Never trust user input
+- Implement CSRF protection in forms
+
+### Error Handling
+- Handle errors gracefully
+- Log errors appropriately
+- Never expose sensitive information in error messages
+
+### Performance
+- Use database indexes appropriately
+- Minimize database queries
+- Cache where possible
+- Optimize CSS and JavaScript
+
+---
+
+## Component Development
+
+### File Structure
+- Follow `COMPONENT_CREATION_PROCEDURE.md` exactly
+- All files in `/admin/components/{component_name}/`
+- Required: `install.php`, `uninstall.php`, `README.md`, `VERSION`
+
+### Installation
+- Fully automated installer (web + CLI + silent modes)
+- Auto-detect database, paths, CSS variables
+- Auto-create menu links (if menu_system installed)
+- CSS compliance check during installation
+
+### Database
+- All tables prefixed: `{component_name}_*`
+- Required tables: `{component_name}_config`, `{component_name}_parameters`
+- Use migrations for version updates
+
+---
+
+## Standalone Page Development
+
+### File Naming
+- PHP files: `lowercase_with_underscores.php`
+- CSS files: `{page_name}.css` or `pages/{page_name}.css`
+- Follow same naming conventions as components
+
+### Function Naming
+- Format: `{page_name}_{action}_{object}()`
+- Example: `user_dashboard_get_stats()`, `product_listing_render_item()`
+
+### CSS Classes
+- Format: `{page}__{element}--{modifier}`
+- Example: `.user_dashboard__header`, `.product_listing__item--featured`
+
+### Database (if page creates tables)
+- Table naming: `{page_name}_{table}`
+- Example: `user_dashboard_preferences`, `checkout_process_sessions`
+
+---
+
+## Quick Reference
+
+| Type | Format | Example |
+|------|--------|---------|
+| Component Name | `lowercase_with_underscores` | `menu_system` |
+| PHP File | `lowercase_with_underscores.php` | `user_dashboard.php` |
+| PHP Function | `{prefix}_{action}_{object}()` | `user_dashboard_get_stats()` |
+| CSS Variable (Theme) | `--{category}-{property}` | `--color-primary` |
+| CSS Variable (Custom) | `--{component_name}-{property}` | `--menu-system-menu-width` |
+| CSS Class | `{prefix}__{element}--{modifier}` | `.menu_system__item--active` |
+| Database Table | `{prefix}_{table}` | `menu_system_menus` |
+| Database Column | `lowercase_with_underscores` | `user_id` |
+
+---
+
+## Tools Available
+
+- **CSS Audit Tool**: `php admin/tools/css-audit.php {component_name}`
+- **CSS Linter**: Integrated into component installers
+- **CSS Compliance Check**: Runs during component installation
+- **CSS Variable Reference**: `admin/components/theme/docs/CSS_VARIABLE_REFERENCE.md`
+- **Setup Script**: `_standards/setup-standards.php` (copy standards to new projects)
+
+---
+
+## Enforcement
+
+### During Development
+- Cursor automatically references these rules
+- CSS linter runs during component installation
+- Code review checklist includes naming standards
+
+### During Installation
+- Installer validates naming conventions
+- CSS compliance check runs automatically
+- Warnings shown for violations
+
+---
+
+## AI Interaction Standards - Popup Questions
+
+**When asking questions in a popup, ALWAYS follow these rules:**
+
+1. **Ask questions in a popup** and mark which letter you recommend.
+2. **Star ratings**: When adding stars, use:
+   - "GOOD=1" ⭐
+   - "BETTER=2" ⭐⭐
+   - "BEST=3" ⭐⭐⭐
+3. **Option ordering**: Display the best choice as **option A** and then continue down in rank (B, C, D, etc.).
+4. **Selectability**: Make all options selectable.
+
+**These rules apply to:**
+- ✅ All decision-making questions
+- ✅ All option selection prompts
+- ✅ All recommendations with multiple choices
+- ✅ Any popup that presents alternatives
+
+**Reference**: See `admin/components/PROMPT_POPUP.txt` for the original prompt instructions.
+
+---
+
+**Last Updated**: 2025-01-27  
+**Version**: 1.0.0  
+**Standards Location**: `_standards/` folder
+

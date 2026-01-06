@@ -1,0 +1,620 @@
+{
+  "designSystem": {
+    "name": "Larkon Admin Dashboard Design System",
+    "version": "1.0.0",
+    "description": "High-level design guidelines for replicating the Larkon admin dashboard aesthetic. This design system emphasizes clean, modern interfaces with a warm color palette and professional spacing.",
+    
+    "designPhilosophy": {
+      "overallStyle": "Modern, clean, professional admin dashboard with a warm and approachable aesthetic",
+      "designPrinciples": [
+        "Clarity over decoration - every element serves a purpose",
+        "Consistent spacing creates visual rhythm and hierarchy",
+        "Subtle shadows and borders define depth without heaviness",
+        "Warm color palette creates approachability while maintaining professionalism",
+        "Typography hierarchy guides user attention naturally",
+        "Generous white space prevents visual clutter",
+        "Rounded corners soften the interface and feel modern"
+      ],
+      "visualCharacteristics": [
+        "Light, airy backgrounds with subtle texture",
+        "Soft shadows for depth (not harsh or dramatic)",
+        "Rounded corners throughout (8px-12px typical)",
+        "Clean borders when needed (often subtle or transparent)",
+        "Icon-driven navigation with clear labels",
+        "Card-based content organization",
+        "Consistent color coding for status and actions"
+      ]
+    },
+
+    "colorPalette": {
+      "primary": {
+        "main": "#ff6c2f",
+        "description": "Warm orange - primary action color, creates energy and warmth",
+        "rgb": "255, 108, 47",
+        "hover": "#d95c28",
+        "subtle": "#ffe2d5",
+        "borderSubtle": "#ffc4ac",
+        "textEmphasis": "#662b13"
+      },
+      "secondary": {
+        "main": "#5d7186",
+        "description": "Muted blue-gray - secondary text and elements",
+        "rgb": "93, 113, 134",
+        "subtle": "#dfe3e7",
+        "borderSubtle": "#bec6cf",
+        "textEmphasis": "#252d36"
+      },
+      "success": {
+        "main": "#22c55e",
+        "description": "Fresh green - success states, positive actions",
+        "rgb": "34, 197, 94",
+        "subtle": "#d3f3df",
+        "borderSubtle": "#a7e8bf",
+        "textEmphasis": "#0e4f26"
+      },
+      "danger": {
+        "main": "#ef5f5f",
+        "description": "Soft red - errors, warnings, destructive actions",
+        "rgb": "239, 95, 95",
+        "subtle": "#fcdfdf",
+        "borderSubtle": "#f9bfbf",
+        "textEmphasis": "#602626"
+      },
+      "warning": {
+        "main": "#f9b931",
+        "description": "Warm yellow - warnings, attention needed",
+        "rgb": "249, 185, 49",
+        "subtle": "#fef1d6",
+        "borderSubtle": "#fde3ad",
+        "textEmphasis": "#644a14"
+      },
+      "info": {
+        "main": "#4ecac2",
+        "description": "Cyan - informational elements",
+        "rgb": "78, 202, 194",
+        "subtle": "#dcf4f3",
+        "borderSubtle": "#b8eae7",
+        "textEmphasis": "#1f514e"
+      },
+      "neutral": {
+        "white": "#ffffff",
+        "gray100": "#f8f9fa",
+        "gray200": "#eef2f7",
+        "gray300": "#d8dfe7",
+        "gray400": "#b0b0bb",
+        "gray500": "#8486a7",
+        "gray600": "#5d7186",
+        "gray700": "#424e5a",
+        "gray800": "#36404a",
+        "gray900": "#323a46",
+        "black": "#000000"
+      },
+      "backgrounds": {
+        "body": "#f9f7f7",
+        "description": "Warm off-white - main background, creates softness",
+        "card": "#ffffff",
+        "topbar": "#f9f7f7",
+        "sidebar": "#262d34",
+        "input": "#eae8e8",
+        "search": "#eae8e8"
+      },
+      "text": {
+        "primary": "#313b5e",
+        "secondary": "#5d7186",
+        "tertiary": "#424e5a",
+        "muted": "#707793",
+        "emphasis": "rgba(93, 113, 134, 0.75)",
+        "onPrimary": "#ffffff",
+        "onDark": "#ffffff",
+        "description": "Primary: Dark blue-gray for headings. Secondary: Medium gray for body text."
+      },
+      "borders": {
+        "default": "#eaedf1",
+        "description": "Very light gray - subtle separation",
+        "input": "#d8dfe7",
+        "inputFocus": "#b0b0bb",
+        "nav": "#2f3944"
+      },
+      "semantic": {
+        "link": "#8486a7",
+        "linkHover": "#d95c28",
+        "valid": "#22c55e",
+        "invalid": "#ef5f5f"
+      }
+    },
+
+    "typography": {
+      "fontFamily": {
+        "primary": "\"Play\", sans-serif",
+        "description": "Modern, friendly sans-serif - main typeface",
+        "monospace": "SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace"
+      },
+      "scale": {
+        "base": {
+          "size": "14px",
+          "lineHeight": "21px",
+          "weight": "400",
+          "description": "Base body text - comfortable reading size"
+        },
+        "h1": {
+          "size": "2.5rem",
+          "lineHeight": "1.2",
+          "weight": "600",
+          "color": "#313b5e"
+        },
+        "h2": {
+          "size": "2rem",
+          "lineHeight": "1.3",
+          "weight": "600",
+          "color": "#313b5e"
+        },
+        "h3": {
+          "size": "1.75rem",
+          "lineHeight": "1.4",
+          "weight": "600",
+          "color": "#313b5e"
+        },
+        "h4": {
+          "size": "1.5rem",
+          "lineHeight": "1.4",
+          "weight": "600",
+          "color": "#313b5e"
+        },
+        "h5": {
+          "size": "1.25rem",
+          "lineHeight": "1.5",
+          "weight": "600",
+          "color": "#313b5e"
+        },
+        "h6": {
+          "size": "1rem",
+          "lineHeight": "1.5",
+          "weight": "400",
+          "color": "#5d7186"
+        },
+        "small": {
+          "size": "12px",
+          "lineHeight": "1.5",
+          "weight": "400"
+        },
+        "caption": {
+          "size": "10px",
+          "lineHeight": "1.4",
+          "weight": "600"
+        }
+      },
+      "weights": {
+        "regular": "400",
+        "medium": "500",
+        "semibold": "600",
+        "bold": "700"
+      }
+    },
+
+    "spacing": {
+      "scale": {
+        "xs": "4px",
+        "sm": "8px",
+        "md": "12px",
+        "lg": "16px",
+        "xl": "24px",
+        "2xl": "32px",
+        "3xl": "48px",
+        "4xl": "64px"
+      },
+      "componentPadding": {
+        "card": "24px",
+        "button": {
+          "small": "4px 8px",
+          "medium": "6px 12px",
+          "large": "8px 16px"
+        },
+        "input": "8px 15px 8px 40px",
+        "tableCell": "13.6px 13.6px 13.6px 24px",
+        "alert": "12px 20px",
+        "badge": "3px 6px"
+      },
+      "layout": {
+        "containerPadding": "24px",
+        "sectionSpacing": "24px",
+        "elementGap": "16px",
+        "formFieldGap": "16px"
+      }
+    },
+
+    "layout": {
+      "structure": {
+        "sidebar": {
+          "width": "280px",
+          "widthSmall": "75px",
+          "backgroundColor": "#262d34",
+          "textColor": "#9097a7",
+          "activeColor": "#ffffff",
+          "itemPadding": "10px 25px",
+          "itemFontSize": "15px",
+          "iconSize": "22px"
+        },
+        "topbar": {
+          "height": "100px",
+          "backgroundColor": "#f9f7f7",
+          "padding": "0 0 0 280px",
+          "textColor": "#5d7186"
+        },
+        "content": {
+          "padding": "24px",
+          "backgroundColor": "#f9f7f7",
+          "maxWidth": "none"
+        },
+        "footer": {
+          "height": "60px",
+          "backgroundColor": "#ffffff",
+          "textColor": "#5d7186"
+        }
+      },
+      "breakpoints": {
+        "xs": "0px",
+        "sm": "576px",
+        "md": "768px",
+        "lg": "992px",
+        "xl": "1200px",
+        "xxl": "1400px"
+      },
+      "grid": {
+        "columns": "12",
+        "gutter": "24px",
+        "containerMaxWidth": "1400px"
+      }
+    },
+
+    "components": {
+      "button": {
+        "primary": {
+          "backgroundColor": "#ff6c2f",
+          "color": "#ffffff",
+          "borderRadius": "8px",
+          "padding": "6px 12px",
+          "fontSize": "12.6px",
+          "fontWeight": "400",
+          "border": "0.8px solid #ff6c2f",
+          "boxShadow": "none",
+          "hover": {
+            "backgroundColor": "#d95c28",
+            "borderColor": "#d95c28"
+          },
+          "focus": {
+            "ringColor": "rgba(255, 108, 47, 0.25)",
+            "ringWidth": "0.15rem"
+          }
+        },
+        "secondary": {
+          "backgroundColor": "transparent",
+          "color": "#5d7186",
+          "borderRadius": "8px",
+          "padding": "6px 12px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "border": "1px solid #eaedf1"
+        },
+        "sizes": {
+          "small": {
+            "padding": "4px 8px",
+            "fontSize": "12px"
+          },
+          "medium": {
+            "padding": "6px 12px",
+            "fontSize": "14px"
+          },
+          "large": {
+            "padding": "8px 16px",
+            "fontSize": "16px"
+          }
+        }
+      },
+      "card": {
+        "backgroundColor": "#ffffff",
+        "borderRadius": "12px",
+        "padding": "24px",
+        "margin": "0 0 24px",
+        "boxShadow": "0px 3px 4px 0px rgba(0, 0, 0, 0.03)",
+        "border": "0px solid #eaedf1",
+        "description": "Clean white cards with subtle shadow for depth"
+      },
+      "input": {
+        "backgroundColor": "#eae8e8",
+        "color": "#5d7186",
+        "borderRadius": "8px",
+        "padding": "8px 15px 8px 40px",
+        "border": "0px",
+        "fontSize": "14px",
+        "focus": {
+          "borderColor": "#b0b0bb",
+          "outline": "none",
+          "ringColor": "rgba(255, 108, 47, 0.25)",
+          "ringWidth": "0.15rem"
+        },
+        "placeholder": {
+          "color": "#8486a7"
+        }
+      },
+      "table": {
+        "backgroundColor": "transparent",
+        "borderCollapse": "collapse",
+        "fontSize": "14px",
+        "width": "100%",
+        "header": {
+          "backgroundColor": "transparent",
+          "color": "#5d7186",
+          "fontWeight": "600",
+          "padding": "13.6px 13.6px 13.6px 24px",
+          "textAlign": "left"
+        },
+        "cell": {
+          "backgroundColor": "transparent",
+          "color": "#5d7186",
+          "padding": "13.6px 13.6px 13.6px 24px",
+          "border": "none"
+        },
+        "row": {
+          "hover": {
+            "backgroundColor": "#f8f9fa"
+          }
+        }
+      },
+      "badge": {
+        "backgroundColor": "#ef5f5f",
+        "color": "#ffffff",
+        "borderRadius": "800px",
+        "padding": "3px 6px",
+        "fontSize": "10px",
+        "fontWeight": "600",
+        "variants": {
+          "primary": {
+            "backgroundColor": "#ff6c2f",
+            "color": "#ffffff"
+          },
+          "success": {
+            "backgroundColor": "#22c55e",
+            "color": "#ffffff"
+          },
+          "danger": {
+            "backgroundColor": "#ef5f5f",
+            "color": "#ffffff"
+          },
+          "warning": {
+            "backgroundColor": "#f9b931",
+            "color": "#ffffff"
+          },
+          "info": {
+            "backgroundColor": "#4ecac2",
+            "color": "#ffffff"
+          },
+          "secondary": {
+            "backgroundColor": "#5d7186",
+            "color": "#ffffff"
+          }
+        }
+      },
+      "alert": {
+        "borderRadius": "12px",
+        "padding": "12px 20px",
+        "border": "0px",
+        "variants": {
+          "primary": {
+            "backgroundColor": "#ffe2d5",
+            "color": "#662b13",
+            "borderColor": "#ffc4ac"
+          },
+          "success": {
+            "backgroundColor": "#d3f3df",
+            "color": "#0e4f26",
+            "borderColor": "#a7e8bf"
+          },
+          "danger": {
+            "backgroundColor": "#fcdfdf",
+            "color": "#602626",
+            "borderColor": "#f9bfbf"
+          },
+          "warning": {
+            "backgroundColor": "#fef1d6",
+            "color": "#644a14",
+            "borderColor": "#fde3ad"
+          },
+          "info": {
+            "backgroundColor": "#dcf4f3",
+            "color": "#1f514e",
+            "borderColor": "#b8eae7"
+          }
+        }
+      },
+      "navigation": {
+        "sidebar": {
+          "backgroundColor": "#262d34",
+          "itemColor": "#9097a7",
+          "itemHoverColor": "#ffffff",
+          "itemHoverBackground": "transparent",
+          "itemPadding": "10px 25px",
+          "itemFontSize": "15px",
+          "itemIconSize": "22px",
+          "activeIndicator": "left border or background change",
+          "borderColor": "#2f3944"
+        },
+        "breadcrumb": {
+          "color": "#5d7186",
+          "activeColor": "#313b5e",
+          "separator": "/",
+          "fontSize": "14px"
+        }
+      },
+      "avatar": {
+        "size": {
+          "small": "32px",
+          "medium": "40px",
+          "large": "56px"
+        },
+        "borderRadius": "50%",
+        "border": "2px solid #ffffff"
+      },
+      "dropdown": {
+        "backgroundColor": "#ffffff",
+        "borderRadius": "8px",
+        "boxShadow": "0 5px 10px rgba(30, 32, 37, 0.12)",
+        "padding": "8px 0",
+        "itemPadding": "8px 16px",
+        "itemHover": {
+          "backgroundColor": "#f8f9fa"
+        }
+      },
+      "modal": {
+        "overlay": {
+          "backgroundColor": "rgba(0, 0, 0, 0.5)",
+          "backdrop": "blur(2px)"
+        },
+        "content": {
+          "backgroundColor": "#ffffff",
+          "borderRadius": "12px",
+          "boxShadow": "0 5px 10px rgba(30, 32, 37, 0.12)",
+          "padding": "24px",
+          "maxWidth": "600px"
+        }
+      },
+      "pagination": {
+        "item": {
+          "padding": "6px 12px",
+          "borderRadius": "8px",
+          "color": "#5d7186",
+          "active": {
+            "backgroundColor": "#ff6c2f",
+            "color": "#ffffff"
+          },
+          "hover": {
+            "backgroundColor": "#f8f9fa"
+          }
+        }
+      },
+      "status": {
+        "completed": {
+          "color": "#22c55e",
+          "icon": "checkmark"
+        },
+        "processing": {
+          "color": "#f9b931",
+          "icon": "clock"
+        },
+        "pending": {
+          "color": "#5d7186",
+          "icon": "hourglass"
+        },
+        "cancelled": {
+          "color": "#ef5f5f",
+          "icon": "x"
+        }
+      }
+    },
+
+    "effects": {
+      "shadows": {
+        "sm": "0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)",
+        "default": "0px 3px 4px 0px rgba(0, 0, 0, 0.03)",
+        "lg": "0 5px 10px rgba(30, 32, 37, 0.12)",
+        "inset": "inset 0 1px 2px rgba(0, 0, 0, 0.075)",
+        "description": "Subtle shadows for depth - never harsh or dramatic"
+      },
+      "borderRadius": {
+        "sm": "0.5rem",
+        "default": "0.75rem",
+        "md": "8px",
+        "lg": "1rem",
+        "xl": "1.25rem",
+        "2xl": "2rem",
+        "pill": "50rem",
+        "full": "50%",
+        "description": "Rounded corners throughout - 8px-12px most common"
+      },
+      "transitions": {
+        "default": "0.2s ease",
+        "fast": "0.15s ease",
+        "slow": "0.3s ease",
+        "properties": ["background-color", "color", "border-color", "transform", "opacity"]
+      },
+      "focus": {
+        "ringWidth": "0.15rem",
+        "ringColor": "rgba(255, 108, 47, 0.25)",
+        "ringOffset": "2px",
+        "description": "Subtle focus rings for accessibility"
+      }
+    },
+
+    "icons": {
+      "style": "Line icons or filled icons with consistent stroke width",
+      "size": {
+        "xs": "12px",
+        "sm": "16px",
+        "md": "22px",
+        "lg": "24px",
+        "xl": "32px"
+      },
+      "color": "Inherit from parent or use semantic colors",
+      "spacing": "4-8px from text when inline"
+    },
+
+    "patterns": {
+      "statCard": {
+        "layout": "Icon + Title + Value + Change indicator",
+        "spacing": "Generous padding, clear hierarchy",
+        "background": "White card with subtle shadow",
+        "icon": "Large, colored icon (semantic or primary color)",
+        "value": "Large, bold number",
+        "change": "Small percentage with up/down indicator"
+      },
+      "activityFeed": {
+        "layout": "Avatar + Content + Timestamp",
+        "spacing": "Vertical list with consistent gaps",
+        "timestamp": "Small, muted text",
+        "avatar": "Circular, 40px typical"
+      },
+      "dataTable": {
+        "layout": "Clean rows, minimal borders",
+        "header": "Bold, gray text",
+        "rows": "Hover state for interactivity",
+        "actions": "Icon buttons or text links",
+        "pagination": "Bottom right or centered"
+      },
+      "form": {
+        "layout": "Vertical stacking",
+        "labels": "Above inputs, medium weight",
+        "inputs": "Full width, rounded corners",
+        "helpText": "Below inputs, small, muted",
+        "errors": "Red text, below input",
+        "spacing": "16px between fields"
+      },
+      "dashboard": {
+        "layout": "Grid-based, responsive columns",
+        "cards": "White cards with subtle shadows",
+        "spacing": "24px between cards",
+        "charts": "White background, minimal styling",
+        "metrics": "Large numbers, clear labels"
+      }
+    },
+
+    "accessibility": {
+      "colorContrast": {
+        "minimum": "WCAG AA compliant",
+        "textOnPrimary": "White on #ff6c2f meets contrast",
+        "textOnBackground": "Dark gray on light background"
+      },
+      "focusStates": "Visible focus rings on all interactive elements",
+      "keyboardNavigation": "All interactive elements keyboard accessible",
+      "ariaLabels": "Icons and interactive elements have descriptive labels"
+    },
+
+    "implementationNotes": {
+      "cssVariables": "Use CSS custom properties for all design tokens for easy theming",
+      "responsive": "Mobile-first approach, breakpoints at 576px, 768px, 992px, 1200px, 1400px",
+      "vanillaStack": "HTML, CSS, JavaScript, PHP, MySQL - no frameworks required",
+      "fileStructure": "Organize CSS by component, use BEM or similar naming convention",
+      "performance": "Minimize shadows and effects, use CSS transforms for animations",
+      "browserSupport": "Modern browsers (last 2 versions), graceful degradation for older"
+    }
+  }
+}
+

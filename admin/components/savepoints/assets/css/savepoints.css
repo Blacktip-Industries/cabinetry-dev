@@ -1,0 +1,436 @@
+/* Savepoints Component CSS
+ * Uses standardized CSS variables that map to base system with fallbacks
+ */
+
+/* Component CSS Variables - Use theme variables directly */
+/* Component-specific variables only if truly unique */
+
+/* Container */
+.savepoints-container {
+    max-width: var(--breakpoint-xl);
+    margin: 0 auto;
+    padding: var(--spacing-xl);
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+}
+
+/* Header */
+.savepoints-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: var(--border-width) solid var(--border-default);
+}
+
+.savepoints-header h1 {
+    margin: 0;
+    font-size: var(--font-size-h1);
+    color: var(--text-primary);
+}
+
+.savepoints-actions {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+/* Alerts */
+.alert {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+.alert-error {
+    background-color: var(--color-danger-subtle);
+    border: var(--border-width) solid var(--color-danger-border-subtle);
+    color: var(--color-danger-text-emphasis);
+}
+
+.alert-success {
+    background-color: var(--color-success-subtle);
+    border: var(--border-width) solid var(--color-success-border-subtle);
+    color: var(--color-success-text-emphasis);
+}
+
+.alert-warning {
+    background-color: var(--color-warning-subtle);
+    border: var(--border-width) solid var(--color-warning-border-subtle);
+    color: var(--color-warning-text-emphasis);
+}
+
+.alert-info {
+    background-color: var(--color-info-subtle);
+    border: var(--border-width) solid var(--color-info-border-subtle);
+    color: var(--color-info-text-emphasis);
+}
+
+/* Stats */
+.savepoints-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.stat-card {
+    background: var(--bg-card);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-sm);
+    border: var(--border-width) solid var(--border-default);
+    text-align: center;
+}
+
+.stat-value {
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: var(--font-size-small);
+}
+
+/* Tables */
+.savepoints-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-card);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.savepoints-table thead {
+    background: var(--bg-hover);
+}
+
+.savepoints-table th {
+    padding: var(--spacing-table-cell-vertical) var(--spacing-table-cell-horizontal);
+    text-align: left;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    border-bottom: var(--border-width-thick) solid var(--border-default);
+}
+
+.savepoints-table td {
+    padding: var(--spacing-table-cell-vertical) var(--spacing-table-cell-horizontal);
+    border-bottom: var(--border-width) solid var(--border-default);
+    color: var(--text-secondary);
+}
+
+.savepoints-table tbody tr:hover {
+    background: var(--bg-hover);
+}
+
+.savepoints-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: var(--spacing-badge-padding-y) var(--spacing-badge-padding-x);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-medium);
+}
+
+.status-success {
+    background-color: var(--color-success-subtle);
+    color: var(--color-success-text-emphasis);
+}
+
+.status-error {
+    background-color: var(--color-danger-subtle);
+    color: var(--color-danger-text-emphasis);
+}
+
+.status-skipped {
+    background-color: var(--bg-hover);
+    color: var(--text-secondary);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: var(--spacing-button-py) var(--spacing-button-px);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    border: none;
+    transition: all var(--transition-default);
+    font-size: var(--font-size-base);
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--text-on-primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary);
+    opacity: 0.9;
+}
+
+.btn-secondary {
+    background-color: var(--color-secondary);
+    color: var(--text-on-primary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-secondary);
+    opacity: 0.9;
+}
+
+.btn-danger {
+    background-color: var(--color-danger);
+    color: var(--text-on-primary);
+}
+
+.btn-danger:hover {
+    background-color: var(--color-danger);
+    opacity: 0.9;
+}
+
+.btn-sm {
+    padding: var(--spacing-badge-padding-y) var(--spacing-badge-padding-x);
+    font-size: var(--font-size-small);
+}
+
+/* Forms */
+.savepoint-form,
+.restore-form,
+.test-form,
+.settings-form {
+    background: var(--bg-card);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-sm);
+    border: var(--border-width) solid var(--border-default);
+    margin-bottom: var(--spacing-xl);
+}
+
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+}
+
+.form-control {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: var(--border-width) solid var(--border-default);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-base);
+    font-family: var(--font-family);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--focus-ring-color);
+}
+
+.form-text {
+    display: block;
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-size-small);
+    color: var(--text-muted);
+}
+
+.form-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: var(--border-width) solid var(--border-default);
+}
+
+/* Savepoint Details */
+.savepoint-details {
+    background: var(--bg-card);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-sm);
+    border: var(--border-width) solid var(--border-default);
+    margin-bottom: var(--spacing-xl);
+}
+
+.savepoint-info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: var(--spacing-lg);
+}
+
+.savepoint-info-table th {
+    padding: var(--spacing-md);
+    text-align: left;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    width: 200px;
+    vertical-align: top;
+}
+
+.savepoint-info-table td {
+    padding: var(--spacing-md);
+    color: var(--text-secondary);
+}
+
+.savepoint-info-table code {
+    background: var(--bg-hover);
+    padding: var(--spacing-xs) var(--spacing-xs);
+    border-radius: var(--radius-sm);
+    font-family: monospace;
+    font-size: var(--font-size-small);
+}
+
+/* Settings Sections */
+.settings-section {
+    background: var(--bg-card);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-sm);
+    border: var(--border-width) solid var(--border-default);
+    margin-bottom: var(--spacing-xl);
+}
+
+.settings-section h2 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: var(--border-width-thick) solid var(--border-default);
+}
+
+/* Test Modes */
+.test-modes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.test-mode-card {
+    background: var(--bg-card);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-sm);
+    border: var(--border-width) solid var(--border-default);
+}
+
+.test-mode-card h3 {
+    margin-top: 0;
+    color: var(--color-primary);
+}
+
+.test-mode-card ul {
+    margin: var(--spacing-md) 0;
+    padding-left: var(--spacing-lg);
+}
+
+.test-mode-card li {
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-secondary);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-2xl);
+    color: var(--text-muted);
+}
+
+.empty-state p {
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Actions Column */
+.actions {
+    white-space: nowrap;
+}
+
+.actions .btn {
+    margin-right: var(--spacing-xs);
+}
+
+/* Text Utilities */
+.text-muted {
+    color: var(--text-muted);
+}
+
+/* Code */
+code {
+    font-family: 'Courier New', monospace;
+    background: var(--bg-hover);
+    padding: var(--spacing-xs) var(--spacing-xs);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-small);
+}
+
+/* Savepoint Info */
+.savepoint-info {
+    background: var(--bg-hover);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-sm);
+    margin-top: var(--spacing-xl);
+}
+
+.savepoint-info h3 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+.savepoint-info ul {
+    margin: 0;
+    padding-left: var(--spacing-lg);
+}
+
+.savepoint-info li {
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-secondary);
+}
+
+/* Test Result */
+.test-result {
+    background: var(--bg-hover);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-sm);
+    margin-top: var(--spacing-lg);
+}
+
+.test-result pre {
+    background: var(--bg-card);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-sm);
+    overflow-x: auto;
+    font-size: var(--font-size-small);
+}
+
+/* Responsive */
+@media (max-width: var(--breakpoint-md)) {
+    .savepoints-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+    
+    .savepoints-actions {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    
+    .savepoints-table {
+        font-size: var(--font-size-small);
+    }
+    
+    .savepoints-table th,
+    .savepoints-table td {
+        padding: var(--spacing-sm);
+    }
+}
+

@@ -1,0 +1,71 @@
+/* Access Component - Messaging Styles */
+
+.access-messaging .access-table tr.unread {
+    font-weight: var(--font-weight-bold);
+    background-color: var(--color-warning-subtle);
+}
+
+.access-messaging .message-content {
+    padding: var(--spacing-lg);
+    background-color: var(--bg-hover);
+    border-radius: var(--radius-sm);
+    margin-top: var(--spacing-xs);
+    white-space: pre-wrap;
+}
+
+.access-messaging .attachment-list {
+    list-style: none;
+    padding: 0;
+}
+
+.access-messaging .attachment-list li {
+    padding: var(--spacing-xs);
+    background-color: var(--bg-hover);
+    margin-bottom: var(--spacing-xs);
+    border-radius: var(--radius-sm);
+}
+
+.access-messaging .attachment-list li a {
+    text-decoration: none;
+    color: var(--color-primary);
+}
+
+.access-messaging .detail-section {
+    margin-bottom: var(--spacing-2xl);
+    padding: var(--spacing-lg);
+    background-color: var(--bg-hover);
+    border-radius: var(--radius-sm);
+}
+
+.access-messaging .detail-list {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: var(--spacing-lg);
+    margin: 0;
+}
+
+.access-messaging .detail-list dt {
+    font-weight: var(--font-weight-bold);
+    color: var(--text-secondary);
+}
+
+.access-messaging .detail-list dd {
+    margin: 0;
+}
+
+.access-messaging .filter-form {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: flex-end;
+    margin-bottom: var(--spacing-lg);
+}
+
+.access-messaging .form-row {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.access-messaging .form-row .form-group {
+    flex: 1;
+}
+

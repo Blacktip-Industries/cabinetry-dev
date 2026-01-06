@@ -1,0 +1,23 @@
+/* Theme Component - Dividers */
+
+.divider {
+  border: none;
+  border-top: var(--border-width) solid var(--border-default);
+  margin: var(--spacing-lg) 0;
+}
+
+.divider-horizontal {
+  border: none;
+  border-top: var(--border-width) solid var(--border-default);
+  margin: var(--spacing-lg) 0;
+}
+
+.divider-vertical {
+  border: none;
+  border-left: var(--border-width) solid var(--border-default);
+  margin: 0 var(--spacing-lg);
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+

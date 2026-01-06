@@ -1,0 +1,2860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Normalization Audit Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        
+        header {
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: #007bff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .summary-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .summary-card.success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        
+        .summary-card.warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .summary-card.danger {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        
+        .summary-card h3 {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .summary-card .value {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+        
+        .component {
+            margin-bottom: 40px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            background: #fafafa;
+        }
+        
+        .component-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .component-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .component-name::before {
+            content: '📦 ';
+        }
+        
+        .score-badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .score-badge.high {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .score-badge.medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .score-badge.low {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .component-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .info-item {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .info-item strong {
+            display: block;
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        
+        .info-item .value {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .file {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .file-header {
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .file-header::before {
+            content: '📄 ';
+        }
+        
+        .issues {
+            margin-top: 15px;
+        }
+        
+        .issue-group {
+            margin-bottom: 20px;
+        }
+        
+        .issue-group-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            padding: 8px;
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+        
+        .issue-item {
+            padding: 10px;
+            margin-bottom: 8px;
+            background: #fff;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+        }
+        
+        .issue-item.old-format {
+            border-left-color: #dc3545;
+        }
+        
+        .issue-item.hardcoded {
+            border-left-color: #ff9800;
+        }
+        
+        .issue-item code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        .old-var {
+            color: #dc3545;
+        }
+        
+        .new-var {
+            color: #28a745;
+        }
+        
+        .no-issues {
+            color: #28a745;
+            font-weight: bold;
+            padding: 15px;
+            background: #d4edda;
+            border-radius: 6px;
+            text-align: center;
+        }
+        
+        .no-issues::before {
+            content: '✅ ';
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CSS Normalization Audit Report</h1>
+            <p class="subtitle">Component CSS Standards Compliance Analysis</p>
+            <p class="subtitle" style="margin-top: 5px; font-size: 0.9em; color: #999;">
+                Generated: <span id="generated-date"></span>
+            </p>
+        </header>
+        
+        <div class="summary" id="summary">
+            <!-- Summary cards will be inserted here -->
+        </div>
+        
+        <div id="components">
+            <!-- Component reports will be inserted here -->
+        </div>
+    </div>
+    
+    <script>
+        // CSS audit data (will be replaced by PHP script)
+        const auditData = [
+    {
+        "component": "access",
+        "css_prefix": "access",
+        "files": [
+            {
+                "file": "C:\\xampp\\htdocs\\bespokecabinetry.au\/admin\/components\/access\/assets\/css\/access.css",
+                "issues": {
+                    "old_format_variables": [],
+                    "hardcoded_colors": {
+                        "0": {
+                            "type": "hex",
+                            "value": "#fff",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "1": {
+                            "type": "hex",
+                            "value": "#e0e0e0",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "2": {
+                            "type": "hex",
+                            "value": "#2196F3",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "3": {
+                            "type": "hex",
+                            "value": "#666",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "11": {
+                            "type": "hex",
+                            "value": "#f5f5f5",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "14": {
+                            "type": "hex",
+                            "value": "#f9f9f9",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "18": {
+                            "type": "hex",
+                            "value": "#f44336",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "19": {
+                            "type": "hex",
+                            "value": "#ddd",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "22": {
+                            "type": "hex",
+                            "value": "#1976D2",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "23": {
+                            "type": "hex",
+                            "value": "#757575",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "24": {
+                            "type": "hex",
+                            "value": "#616161",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "25": {
+                            "type": "hex",
+                            "value": "#4CAF50",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "26": {
+                            "type": "hex",
+                            "value": "#45a049",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "28": {
+                            "type": "hex",
+                            "value": "#da190b",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "30": {
+                            "type": "hex",
+                            "value": "#d4edda",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "31": {
+                            "type": "hex",
+                            "value": "#c3e6cb",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "32": {
+                            "type": "hex",
+                            "value": "#155724",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "33": {
+                            "type": "hex",
+                            "value": "#f8d7da",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "34": {
+                            "type": "hex",
+                            "value": "#f5c6cb",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "35": {
+                            "type": "hex",
+                            "value": "#721c24",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "36": {
+                            "type": "hex",
+                            "value": "#fff3cd",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "37": {
+                            "type": "hex",
+                            "value": "#ffeaa7",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "38": {
+                            "type": "hex",
+                            "value": "#856404",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "39": {
+                            "type": "hex",
+                            "value": "#d1ecf1",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "40": {
+                            "type": "hex",
+                            "value": "#bee5eb",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "41": {
+                            "type": "hex",
+                            "value": "#0c5460",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "43": {
+                            "type": "hex",
+                            "value": "#FF9800",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "64": {
+                            "type": "hex",
+                            "value": "#e3f2fd",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "65": {
+                            "type": "hex",
+                            "value": "#90caf9",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "66": {
+                            "type": "hex",
+                            "value": "#1565c0",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "67": {
+                            "type": "rgb",
+                            "value": "rgba(0,0,0,0.1)",
+                            "suggestion": "Use theme color variable"
+                        },
+                        "68": {
+                            "type": "named",
+                            "value": "white",
+                            "suggestion": "Use theme color variable"
+                        }
+                    },
+                    "hardcoded_spacing": {
+                        "0": {
+                            "type": "px",
+                            "value": "1200px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "1": {
+                            "type": "px",
+                            "value": "20px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "2": {
+                            "type": "px",
+                            "value": "30px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "3": {
+                            "type": "px",
+                            "value": "10px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "4": {
+                            "type": "px",
+                            "value": "200px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "7": {
+                            "type": "px",
+                            "value": "1px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "8": {
+                            "type": "px",
+                            "value": "8px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "13": {
+                            "type": "px",
+                            "value": "250px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "19": {
+                            "type": "px",
+                            "value": "2px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "24": {
+                            "type": "px",
+                            "value": "12px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "38": {
+                            "type": "px",
+                            "value": "5px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "42": {
+                            "type": "px",
+                            "value": "4px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "43": {
+                            "type": "px",
+                            "value": "14px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "44": {
+                            "type": "px",
+                            "value": "100px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "56": {
+                            "type": "px",
+                            "value": "15px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "93": {
+                            "type": "px",
+                            "value": "500px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "94": {
+                            "type": "px",
+                            "value": "50px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        }
+                    },
+                    "missing_theme_vars": []
+                },
+                "total_variables": 0,
+                "file_size": 8600
+            },
+            {
+                "file": "C:\\xampp\\htdocs\\bespokecabinetry.au\/admin\/components\/access\/assets\/css\/chat.css",
+                "issues": {
+                    "old_format_variables": [],
+                    "hardcoded_colors": {
+                        "0": {
+                            "type": "hex",
+                            "value": "#ddd",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "1": {
+                            "type": "hex",
+                            "value": "#fff",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "2": {
+                            "type": "hex",
+                            "value": "#e3f2fd",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "3": {
+                            "type": "hex",
+                            "value": "#f5f5f5",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "4": {
+                            "type": "hex",
+                            "value": "#333",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "5": {
+                            "type": "hex",
+                            "value": "#666",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "11": {
+                            "type": "hex",
+                            "value": "#007bff",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "20": {
+                            "type": "rgb",
+                            "value": "rgba(255, 193, 7, 0.1)",
+                            "suggestion": "Use theme color variable"
+                        },
+                        "21": {
+                            "type": "rgb",
+                            "value": "rgba(0, 123, 255, 0.05)",
+                            "suggestion": "Use theme color variable"
+                        },
+                        "22": {
+                            "type": "named",
+                            "value": "white",
+                            "suggestion": "Use theme color variable"
+                        }
+                    },
+                    "hardcoded_spacing": {
+                        "0": {
+                            "type": "px",
+                            "value": "600px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "1": {
+                            "type": "px",
+                            "value": "1px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "2": {
+                            "type": "px",
+                            "value": "4px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "5": {
+                            "type": "px",
+                            "value": "60px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        }
+                    },
+                    "missing_theme_vars": []
+                },
+                "total_variables": 0,
+                "file_size": 3918
+            },
+            {
+                "file": "C:\\xampp\\htdocs\\bespokecabinetry.au\/admin\/components\/access\/assets\/css\/messaging.css",
+                "issues": {
+                    "old_format_variables": [],
+                    "hardcoded_colors": {
+                        "0": {
+                            "type": "hex",
+                            "value": "#f5f5f5",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "2": {
+                            "type": "hex",
+                            "value": "#007bff",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "4": {
+                            "type": "hex",
+                            "value": "#666",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "5": {
+                            "type": "rgb",
+                            "value": "rgba(255, 193, 7, 0.1)",
+                            "suggestion": "Use theme color variable"
+                        },
+                        "6": {
+                            "type": "named",
+                            "value": "white",
+                            "suggestion": "Use theme color variable"
+                        }
+                    },
+                    "hardcoded_spacing": {
+                        "0": {
+                            "type": "px",
+                            "value": "4px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "3": {
+                            "type": "px",
+                            "value": "150px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        }
+                    },
+                    "missing_theme_vars": []
+                },
+                "total_variables": 0,
+                "file_size": 1460
+            },
+            {
+                "file": "C:\\xampp\\htdocs\\bespokecabinetry.au\/admin\/components\/access\/assets\/css\/variables.css",
+                "issues": {
+                    "old_format_variables": [
+                        {
+                            "old": "--ac-primary-color",
+                            "new": "--access-primary-color",
+                            "value": "#2196F3",
+                            "line": 8
+                        },
+                        {
+                            "old": "--ac-secondary-color",
+                            "new": "--access-secondary-color",
+                            "value": "#757575",
+                            "line": 9
+                        },
+                        {
+                            "old": "--ac-success-color",
+                            "new": "--access-success-color",
+                            "value": "#4CAF50",
+                            "line": 10
+                        },
+                        {
+                            "old": "--ac-danger-color",
+                            "new": "--access-danger-color",
+                            "value": "#f44336",
+                            "line": 11
+                        },
+                        {
+                            "old": "--ac-warning-color",
+                            "new": "--access-warning-color",
+                            "value": "#FF9800",
+                            "line": 12
+                        },
+                        {
+                            "old": "--ac-border-radius",
+                            "new": "--access-border-radius",
+                            "value": "8px",
+                            "line": 14
+                        },
+                        {
+                            "old": "--ac-spacing",
+                            "new": "--access-spacing",
+                            "value": "20px",
+                            "line": 15
+                        }
+                    ],
+                    "hardcoded_colors": [
+                        {
+                            "type": "hex",
+                            "value": "#2196F3",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#757575",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#4CAF50",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#f44336",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#FF9800",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        }
+                    ],
+                    "hardcoded_spacing": [
+                        {
+                            "type": "px",
+                            "value": "8px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        {
+                            "type": "px",
+                            "value": "20px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        }
+                    ],
+                    "missing_theme_vars": []
+                },
+                "total_variables": 7,
+                "file_size": 497
+            }
+        ],
+        "summary": {
+            "total_files": 4,
+            "total_issues": 84,
+            "old_format_count": 7,
+            "hardcoded_colors_count": 52,
+            "hardcoded_spacing_count": 25,
+            "compliance_score": 32.3
+        }
+    },
+    {
+        "component": "email_marketing",
+        "css_prefix": "email-marketing",
+        "files": [
+            {
+                "file": "C:\\xampp\\htdocs\\bespokecabinetry.au\/admin\/components\/email_marketing\/assets\/css\/email_marketing.css",
+                "issues": {
+                    "old_format_variables": [],
+                    "hardcoded_colors": [
+                        {
+                            "type": "hex",
+                            "value": "#fff",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#007bff",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#ddd",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#f8f9fa",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "rgb",
+                            "value": "rgba(0,0,0,0.1)",
+                            "suggestion": "Use theme color variable"
+                        },
+                        {
+                            "type": "named",
+                            "value": "white",
+                            "suggestion": "Use theme color variable"
+                        }
+                    ],
+                    "hardcoded_spacing": {
+                        "0": {
+                            "type": "px",
+                            "value": "16px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "1": {
+                            "type": "px",
+                            "value": "8px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "2": {
+                            "type": "px",
+                            "value": "24px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "4": {
+                            "type": "px",
+                            "value": "2px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "5": {
+                            "type": "px",
+                            "value": "4px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "6": {
+                            "type": "px",
+                            "value": "10px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "7": {
+                            "type": "px",
+                            "value": "20px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "8": {
+                            "type": "px",
+                            "value": "5px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "9": {
+                            "type": "px",
+                            "value": "14px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "10": {
+                            "type": "px",
+                            "value": "12px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "11": {
+                            "type": "px",
+                            "value": "1px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        }
+                    },
+                    "missing_theme_vars": []
+                },
+                "total_variables": 0,
+                "file_size": 969
+            },
+            {
+                "file": "C:\\xampp\\htdocs\\bespokecabinetry.au\/admin\/components\/email_marketing\/assets\/css\/variables.css",
+                "issues": {
+                    "old_format_variables": [
+                        {
+                            "old": "--em-color-primary",
+                            "new": "--email-marketing-color-primary",
+                            "value": "var(--color-primary, #007bff)",
+                            "line": 6
+                        },
+                        {
+                            "old": "--em-color-secondary",
+                            "new": "--email-marketing-color-secondary",
+                            "value": "var(--color-secondary, #6c757d)",
+                            "line": 7
+                        },
+                        {
+                            "old": "--em-spacing-sm",
+                            "new": "--email-marketing-spacing-sm",
+                            "value": "var(--spacing-sm, 8px)",
+                            "line": 8
+                        },
+                        {
+                            "old": "--em-spacing-md",
+                            "new": "--email-marketing-spacing-md",
+                            "value": "var(--spacing-md, 16px)",
+                            "line": 9
+                        },
+                        {
+                            "old": "--em-spacing-lg",
+                            "new": "--email-marketing-spacing-lg",
+                            "value": "var(--spacing-lg, 24px)",
+                            "line": 10
+                        },
+                        {
+                            "old": "--em-font-primary",
+                            "new": "--email-marketing-font-primary",
+                            "value": "var(--font-primary, sans-serif)",
+                            "line": 11
+                        }
+                    ],
+                    "hardcoded_colors": [
+                        {
+                            "type": "hex",
+                            "value": "#007bff",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#6c757d",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        }
+                    ],
+                    "hardcoded_spacing": [
+                        {
+                            "type": "px",
+                            "value": "8px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        {
+                            "type": "px",
+                            "value": "16px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        {
+                            "type": "px",
+                            "value": "24px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        }
+                    ],
+                    "missing_theme_vars": []
+                },
+                "total_variables": 6,
+                "file_size": 481
+            }
+        ],
+        "summary": {
+            "total_files": 2,
+            "total_issues": 28,
+            "old_format_count": 6,
+            "hardcoded_colors_count": 8,
+            "hardcoded_spacing_count": 14,
+            "compliance_score": 41.7
+        }
+    },
+    {
+        "component": "layout",
+        "css_prefix": "layout",
+        "files": [
+            {
+                "file": "C:\\xampp\\htdocs\\bespokecabinetry.au\/admin\/components\/layout\/assets\/css\/layout.css",
+                "issues": {
+                    "old_format_variables": [],
+                    "hardcoded_colors": {
+                        "0": {
+                            "type": "hex",
+                            "value": "#ffffff",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "2": {
+                            "type": "hex",
+                            "value": "#e0e0e0",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "3": {
+                            "type": "hex",
+                            "value": "#1a1a1a",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "6": {
+                            "type": "hex",
+                            "value": "#f5f5f5",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "7": {
+                            "type": "hex",
+                            "value": "#ddd",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "8": {
+                            "type": "hex",
+                            "value": "#999",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "10": {
+                            "type": "hex",
+                            "value": "#333",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        }
+                    },
+                    "hardcoded_spacing": {
+                        "0": {
+                            "type": "px",
+                            "value": "280px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "1": {
+                            "type": "px",
+                            "value": "100px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "3": {
+                            "type": "px",
+                            "value": "1px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "5": {
+                            "type": "px",
+                            "value": "24px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "6": {
+                            "type": "px",
+                            "value": "16px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "7": {
+                            "type": "px",
+                            "value": "60px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "9": {
+                            "type": "px",
+                            "value": "2px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "15": {
+                            "type": "px",
+                            "value": "14px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "17": {
+                            "type": "px",
+                            "value": "6px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "18": {
+                            "type": "px",
+                            "value": "3px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "19": {
+                            "type": "px",
+                            "value": "12px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "20": {
+                            "type": "px",
+                            "value": "992px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "24": {
+                            "type": "px",
+                            "value": "768px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "25": {
+                            "type": "px",
+                            "value": "80px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "31": {
+                            "type": "px",
+                            "value": "75px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "32": {
+                            "type": "px",
+                            "value": "10px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        }
+                    },
+                    "missing_theme_vars": []
+                },
+                "total_variables": 0,
+                "file_size": 5204
+            },
+            {
+                "file": "C:\\xampp\\htdocs\\bespokecabinetry.au\/admin\/components\/layout\/assets\/css\/variables.css",
+                "issues": {
+                    "old_format_variables": [],
+                    "hardcoded_colors": [
+                        {
+                            "type": "hex",
+                            "value": "#f5f5f5",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#ddd",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#999",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        }
+                    ],
+                    "hardcoded_spacing": [
+                        {
+                            "type": "px",
+                            "value": "280px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        {
+                            "type": "px",
+                            "value": "100px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        {
+                            "type": "px",
+                            "value": "24px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        }
+                    ],
+                    "missing_theme_vars": []
+                },
+                "total_variables": 7,
+                "file_size": 692
+            }
+        ],
+        "summary": {
+            "total_files": 2,
+            "total_issues": 29,
+            "old_format_count": 0,
+            "hardcoded_colors_count": 10,
+            "hardcoded_spacing_count": 19,
+            "compliance_score": 40.8
+        }
+    },
+    {
+        "component": "menu_system",
+        "css_prefix": "menu-system",
+        "files": [
+            {
+                "file": "C:\\xampp\\htdocs\\bespokecabinetry.au\/admin\/components\/menu_system\/assets\/css\/menu_system.css",
+                "issues": {
+                    "old_format_variables": [
+                        {
+                            "old": "--ms-color-primary",
+                            "new": "--menu-system-color-primary",
+                            "value": "var(--color-primary, #ff6c2f)",
+                            "line": 8
+                        },
+                        {
+                            "old": "--ms-color-secondary",
+                            "new": "--menu-system-color-secondary",
+                            "value": "var(--color-secondary, #5d7186)",
+                            "line": 9
+                        },
+                        {
+                            "old": "--ms-text-primary",
+                            "new": "--menu-system-text-primary",
+                            "value": "var(--text-primary, #313b5e)",
+                            "line": 10
+                        },
+                        {
+                            "old": "--ms-text-secondary",
+                            "new": "--menu-system-text-secondary",
+                            "value": "var(--text-secondary, #5d7186)",
+                            "line": 11
+                        },
+                        {
+                            "old": "--ms-text-on-dark",
+                            "new": "--menu-system-text-on-dark",
+                            "value": "var(--text-on-dark, #ffffff)",
+                            "line": 12
+                        },
+                        {
+                            "old": "--ms-text-muted",
+                            "new": "--menu-system-text-muted",
+                            "value": "var(--text-muted, #707793)",
+                            "line": 13
+                        },
+                        {
+                            "old": "--ms-bg-card",
+                            "new": "--menu-system-bg-card",
+                            "value": "var(--bg-card, #ffffff)",
+                            "line": 16
+                        },
+                        {
+                            "old": "--ms-bg-body",
+                            "new": "--menu-system-bg-body",
+                            "value": "var(--bg-body, #f9f7f7)",
+                            "line": 17
+                        },
+                        {
+                            "old": "--ms-bg-secondary",
+                            "new": "--menu-system-bg-secondary",
+                            "value": "var(--bg-secondary, #f8f9fa)",
+                            "line": 18
+                        },
+                        {
+                            "old": "--ms-bg-dark",
+                            "new": "--menu-system-bg-dark",
+                            "value": "var(--menu-bg-color, #262d34)",
+                            "line": 19
+                        },
+                        {
+                            "old": "--ms-spacing-xs",
+                            "new": "--menu-system-spacing-xs",
+                            "value": "var(--spacing-xs, 4px)",
+                            "line": 22
+                        },
+                        {
+                            "old": "--ms-spacing-sm",
+                            "new": "--menu-system-spacing-sm",
+                            "value": "var(--spacing-sm, 8px)",
+                            "line": 23
+                        },
+                        {
+                            "old": "--ms-spacing-md",
+                            "new": "--menu-system-spacing-md",
+                            "value": "var(--spacing-md, 12px)",
+                            "line": 24
+                        },
+                        {
+                            "old": "--ms-spacing-lg",
+                            "new": "--menu-system-spacing-lg",
+                            "value": "var(--spacing-lg, 16px)",
+                            "line": 25
+                        },
+                        {
+                            "old": "--ms-spacing-xl",
+                            "new": "--menu-system-spacing-xl",
+                            "value": "var(--spacing-xl, 24px)",
+                            "line": 26
+                        },
+                        {
+                            "old": "--ms-border-default",
+                            "new": "--menu-system-border-default",
+                            "value": "var(--border-default, #eaedf1)",
+                            "line": 29
+                        },
+                        {
+                            "old": "--ms-font-primary",
+                            "new": "--menu-system-font-primary",
+                            "value": "var(--font-primary, sans-serif)",
+                            "line": 32
+                        },
+                        {
+                            "old": "--ms-menu-width",
+                            "new": "--menu-system-menu-width",
+                            "value": "280px",
+                            "line": 35
+                        },
+                        {
+                            "old": "--ms-menu-bg-color",
+                            "new": "--menu-system-menu-bg-color",
+                            "value": "var(--ms-bg-dark, #262d34)",
+                            "line": 36
+                        },
+                        {
+                            "old": "--ms-menu-active-text-color",
+                            "new": "--menu-system-menu-active-text-color",
+                            "value": "var(--ms-text-on-dark, #ffffff)",
+                            "line": 37
+                        }
+                    ],
+                    "hardcoded_colors": {
+                        "0": {
+                            "type": "hex",
+                            "value": "#ff6c2f",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "1": {
+                            "type": "hex",
+                            "value": "#5d7186",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "2": {
+                            "type": "hex",
+                            "value": "#313b5e",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "4": {
+                            "type": "hex",
+                            "value": "#ffffff",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "5": {
+                            "type": "hex",
+                            "value": "#707793",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "7": {
+                            "type": "hex",
+                            "value": "#f9f7f7",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "8": {
+                            "type": "hex",
+                            "value": "#f8f9fa",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "9": {
+                            "type": "hex",
+                            "value": "#262d34",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "10": {
+                            "type": "hex",
+                            "value": "#eaedf1",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "13": {
+                            "type": "hex",
+                            "value": "#9097a7",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "25": {
+                            "type": "hex",
+                            "value": "#f3f4f6",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "26": {
+                            "type": "rgb",
+                            "value": "rgba(0, 0, 0, 0.1)",
+                            "suggestion": "Use theme color variable"
+                        },
+                        "27": {
+                            "type": "rgb",
+                            "value": "rgba(0, 0, 0, 0.15)",
+                            "suggestion": "Use theme color variable"
+                        }
+                    },
+                    "hardcoded_spacing": {
+                        "0": {
+                            "type": "px",
+                            "value": "4px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "1": {
+                            "type": "px",
+                            "value": "8px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "2": {
+                            "type": "px",
+                            "value": "12px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "3": {
+                            "type": "px",
+                            "value": "16px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "4": {
+                            "type": "px",
+                            "value": "24px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "5": {
+                            "type": "px",
+                            "value": "280px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "7": {
+                            "type": "px",
+                            "value": "15px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "8": {
+                            "type": "px",
+                            "value": "3px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "9": {
+                            "type": "px",
+                            "value": "22px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "14": {
+                            "type": "px",
+                            "value": "25px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "16": {
+                            "type": "px",
+                            "value": "14px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "19": {
+                            "type": "px",
+                            "value": "992px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "21": {
+                            "type": "px",
+                            "value": "75px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "22": {
+                            "type": "px",
+                            "value": "10px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "27": {
+                            "type": "px",
+                            "value": "1px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "33": {
+                            "type": "px",
+                            "value": "300px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        }
+                    },
+                    "missing_theme_vars": []
+                },
+                "total_variables": 20,
+                "file_size": 7064
+            },
+            {
+                "file": "C:\\xampp\\htdocs\\bespokecabinetry.au\/admin\/components\/menu_system\/assets\/css\/variables.css",
+                "issues": {
+                    "old_format_variables": [
+                        {
+                            "old": "--ms-menu-width",
+                            "new": "--menu-system-menu-width",
+                            "value": "280px",
+                            "line": 14
+                        },
+                        {
+                            "old": "--ms-menu-bg-color",
+                            "new": "--menu-system-menu-bg-color",
+                            "value": "var(--ms-bg-dark, #262d34)",
+                            "line": 15
+                        },
+                        {
+                            "old": "--ms-menu-active-text-color",
+                            "new": "--menu-system-menu-active-text-color",
+                            "value": "var(--ms-text-on-dark, #ffffff)",
+                            "line": 16
+                        },
+                        {
+                            "old": "--ms-menu-section-header-font-size",
+                            "new": "--menu-system-menu-section-header-font-size",
+                            "value": "12px",
+                            "line": 17
+                        },
+                        {
+                            "old": "--ms-menu-section-header-font-weight",
+                            "new": "--menu-system-menu-section-header-font-weight",
+                            "value": "600",
+                            "line": 18
+                        },
+                        {
+                            "old": "--ms-menu-section-header-color",
+                            "new": "--menu-system-menu-section-header-color",
+                            "value": "#6B7280",
+                            "line": 19
+                        },
+                        {
+                            "old": "--ms-menu-section-header-padding-top",
+                            "new": "--menu-system-menu-section-header-padding-top",
+                            "value": "16px",
+                            "line": 20
+                        },
+                        {
+                            "old": "--ms-menu-section-header-padding-bottom",
+                            "new": "--menu-system-menu-section-header-padding-bottom",
+                            "value": "8px",
+                            "line": 21
+                        },
+                        {
+                            "old": "--ms-menu-section-header-padding-left",
+                            "new": "--menu-system-menu-section-header-padding-left",
+                            "value": "16px",
+                            "line": 22
+                        },
+                        {
+                            "old": "--ms-menu-section-header-padding-right",
+                            "new": "--menu-system-menu-section-header-padding-right",
+                            "value": "16px",
+                            "line": 23
+                        },
+                        {
+                            "old": "--ms-menu-section-header-text-transform",
+                            "new": "--menu-system-menu-section-header-text-transform",
+                            "value": "uppercase",
+                            "line": 24
+                        },
+                        {
+                            "old": "--ms-menu-section-header-letter-spacing",
+                            "new": "--menu-system-menu-section-header-letter-spacing",
+                            "value": "0.5px",
+                            "line": 25
+                        },
+                        {
+                            "old": "--ms-menu-section-header-background-color",
+                            "new": "--menu-system-menu-section-header-background-color",
+                            "value": "transparent",
+                            "line": 26
+                        },
+                        {
+                            "old": "--ms-indent-menu-section-header",
+                            "new": "--menu-system-indent-menu-section-header",
+                            "value": "25px",
+                            "line": 29
+                        },
+                        {
+                            "old": "--ms-indent-menu",
+                            "new": "--menu-system-indent-menu",
+                            "value": "25px",
+                            "line": 29
+                        },
+                        {
+                            "old": "--ms-indent-submenu",
+                            "new": "--menu-system-indent-submenu",
+                            "value": "59px",
+                            "line": 31
+                        },
+                        {
+                            "old": "--ms-icon-size-menu-side",
+                            "new": "--menu-system-icon-size-menu-side",
+                            "value": "24px",
+                            "line": 34
+                        },
+                        {
+                            "old": "--ms-icon-size-menu-page",
+                            "new": "--menu-system-icon-size-menu-page",
+                            "value": "24px",
+                            "line": 35
+                        },
+                        {
+                            "old": "--ms-icon-size-menu-item",
+                            "new": "--menu-system-icon-size-menu-item",
+                            "value": "24px",
+                            "line": 36
+                        },
+                        {
+                            "old": "--ms-icon-default-color",
+                            "new": "--menu-system-icon-default-color",
+                            "value": "#EF4444",
+                            "line": 37
+                        }
+                    ],
+                    "hardcoded_colors": [
+                        {
+                            "type": "hex",
+                            "value": "#262d34",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#ffffff",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#6B7280",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#EF4444",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        }
+                    ],
+                    "hardcoded_spacing": {
+                        "0": {
+                            "type": "px",
+                            "value": "280px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "1": {
+                            "type": "px",
+                            "value": "12px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "2": {
+                            "type": "px",
+                            "value": "16px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "3": {
+                            "type": "px",
+                            "value": "8px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "6": {
+                            "type": "px",
+                            "value": "0.5px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "7": {
+                            "type": "px",
+                            "value": "25px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "9": {
+                            "type": "px",
+                            "value": "59px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "10": {
+                            "type": "px",
+                            "value": "24px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        }
+                    },
+                    "missing_theme_vars": []
+                },
+                "total_variables": 20,
+                "file_size": 1451
+            }
+        ],
+        "summary": {
+            "total_files": 2,
+            "total_issues": 81,
+            "old_format_count": 40,
+            "hardcoded_colors_count": 17,
+            "hardcoded_spacing_count": 24,
+            "compliance_score": 19.8
+        }
+    },
+    {
+        "component": "product_options",
+        "css_prefix": "product-options",
+        "files": [
+            {
+                "file": "C:\\xampp\\htdocs\\bespokecabinetry.au\/admin\/components\/product_options\/assets\/css\/product-options.css",
+                "issues": {
+                    "old_format_variables": [],
+                    "hardcoded_colors": {
+                        "0": {
+                            "type": "hex",
+                            "value": "#ffffff",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "1": {
+                            "type": "hex",
+                            "value": "#dee2e6",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "2": {
+                            "type": "hex",
+                            "value": "#007bff",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "3": {
+                            "type": "hex",
+                            "value": "#6c757d",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "8": {
+                            "type": "hex",
+                            "value": "#e9ecef",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "11": {
+                            "type": "hex",
+                            "value": "#f8f9fa",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "14": {
+                            "type": "hex",
+                            "value": "#0056b3",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "16": {
+                            "type": "hex",
+                            "value": "#545b62",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "19": {
+                            "type": "named",
+                            "value": "white",
+                            "suggestion": "Use theme color variable"
+                        }
+                    },
+                    "hardcoded_spacing": {
+                        "0": {
+                            "type": "px",
+                            "value": "20px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "1": {
+                            "type": "px",
+                            "value": "200px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "4": {
+                            "type": "px",
+                            "value": "1px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "5": {
+                            "type": "px",
+                            "value": "4px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "7": {
+                            "type": "px",
+                            "value": "10px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "10": {
+                            "type": "px",
+                            "value": "16px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "14": {
+                            "type": "px",
+                            "value": "8px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "21": {
+                            "type": "px",
+                            "value": "2px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "26": {
+                            "type": "px",
+                            "value": "14px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "29": {
+                            "type": "px",
+                            "value": "18px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "31": {
+                            "type": "px",
+                            "value": "32px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "32": {
+                            "type": "px",
+                            "value": "24px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "36": {
+                            "type": "px",
+                            "value": "800px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "45": {
+                            "type": "px",
+                            "value": "768px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        }
+                    },
+                    "missing_theme_vars": []
+                },
+                "total_variables": 0,
+                "file_size": 4695
+            },
+            {
+                "file": "C:\\xampp\\htdocs\\bespokecabinetry.au\/admin\/components\/product_options\/assets\/css\/variables.css",
+                "issues": {
+                    "old_format_variables": [
+                        {
+                            "old": "--po-color-primary",
+                            "new": "--product-options-color-primary",
+                            "value": "var(--color-primary, #007bff)",
+                            "line": 6
+                        },
+                        {
+                            "old": "--po-color-secondary",
+                            "new": "--product-options-color-secondary",
+                            "value": "var(--color-secondary, #6c757d)",
+                            "line": 7
+                        },
+                        {
+                            "old": "--po-color-success",
+                            "new": "--product-options-color-success",
+                            "value": "var(--color-success, #28a745)",
+                            "line": 8
+                        },
+                        {
+                            "old": "--po-color-danger",
+                            "new": "--product-options-color-danger",
+                            "value": "var(--color-danger, #dc3545)",
+                            "line": 9
+                        },
+                        {
+                            "old": "--po-color-warning",
+                            "new": "--product-options-color-warning",
+                            "value": "var(--color-warning, #ffc107)",
+                            "line": 10
+                        },
+                        {
+                            "old": "--po-color-info",
+                            "new": "--product-options-color-info",
+                            "value": "var(--color-info, #17a2b8)",
+                            "line": 11
+                        },
+                        {
+                            "old": "--po-spacing-xs",
+                            "new": "--product-options-spacing-xs",
+                            "value": "var(--spacing-xs, 4px)",
+                            "line": 14
+                        },
+                        {
+                            "old": "--po-spacing-sm",
+                            "new": "--product-options-spacing-sm",
+                            "value": "var(--spacing-sm, 8px)",
+                            "line": 15
+                        },
+                        {
+                            "old": "--po-spacing-md",
+                            "new": "--product-options-spacing-md",
+                            "value": "var(--spacing-md, 16px)",
+                            "line": 16
+                        },
+                        {
+                            "old": "--po-spacing-lg",
+                            "new": "--product-options-spacing-lg",
+                            "value": "var(--spacing-lg, 24px)",
+                            "line": 17
+                        },
+                        {
+                            "old": "--po-spacing-xl",
+                            "new": "--product-options-spacing-xl",
+                            "value": "var(--spacing-xl, 32px)",
+                            "line": 18
+                        },
+                        {
+                            "old": "--po-font-family",
+                            "new": "--product-options-font-family",
+                            "value": "var(--font-family, sans-serif)",
+                            "line": 21
+                        },
+                        {
+                            "old": "--po-font-size-base",
+                            "new": "--product-options-font-size-base",
+                            "value": "var(--font-size-base, 16px)",
+                            "line": 22
+                        },
+                        {
+                            "old": "--po-font-size-sm",
+                            "new": "--product-options-font-size-sm",
+                            "value": "var(--font-size-sm, 14px)",
+                            "line": 23
+                        },
+                        {
+                            "old": "--po-font-size-lg",
+                            "new": "--product-options-font-size-lg",
+                            "value": "var(--font-size-lg, 18px)",
+                            "line": 24
+                        },
+                        {
+                            "old": "--po-border-radius",
+                            "new": "--product-options-border-radius",
+                            "value": "var(--border-radius, 4px)",
+                            "line": 27
+                        },
+                        {
+                            "old": "--po-border-width",
+                            "new": "--product-options-border-width",
+                            "value": "var(--border-width, 1px)",
+                            "line": 28
+                        },
+                        {
+                            "old": "--po-border-color",
+                            "new": "--product-options-border-color",
+                            "value": "var(--border-color, #dee2e6)",
+                            "line": 29
+                        },
+                        {
+                            "old": "--po-bg-primary",
+                            "new": "--product-options-bg-primary",
+                            "value": "var(--bg-primary, #ffffff)",
+                            "line": 32
+                        },
+                        {
+                            "old": "--po-bg-secondary",
+                            "new": "--product-options-bg-secondary",
+                            "value": "var(--bg-secondary, #f8f9fa)",
+                            "line": 33
+                        },
+                        {
+                            "old": "--po-bg-hover",
+                            "new": "--product-options-bg-hover",
+                            "value": "var(--bg-hover, #e9ecef)",
+                            "line": 34
+                        }
+                    ],
+                    "hardcoded_colors": [
+                        {
+                            "type": "hex",
+                            "value": "#007bff",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#6c757d",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#28a745",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#dc3545",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#ffc107",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#17a2b8",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#dee2e6",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#ffffff",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#f8f9fa",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#e9ecef",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        }
+                    ],
+                    "hardcoded_spacing": {
+                        "0": {
+                            "type": "px",
+                            "value": "4px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "1": {
+                            "type": "px",
+                            "value": "8px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "2": {
+                            "type": "px",
+                            "value": "16px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "3": {
+                            "type": "px",
+                            "value": "24px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "4": {
+                            "type": "px",
+                            "value": "32px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "6": {
+                            "type": "px",
+                            "value": "14px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "7": {
+                            "type": "px",
+                            "value": "18px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "9": {
+                            "type": "px",
+                            "value": "1px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        }
+                    },
+                    "missing_theme_vars": []
+                },
+                "total_variables": 21,
+                "file_size": 1420
+            }
+        ],
+        "summary": {
+            "total_files": 2,
+            "total_issues": 62,
+            "old_format_count": 21,
+            "hardcoded_colors_count": 19,
+            "hardcoded_spacing_count": 22,
+            "compliance_score": 24.4
+        }
+    },
+    {
+        "component": "savepoints",
+        "css_prefix": "savepoints",
+        "files": [
+            {
+                "file": "C:\\xampp\\htdocs\\bespokecabinetry.au\/admin\/components\/savepoints\/assets\/css\/savepoints.css",
+                "issues": {
+                    "old_format_variables": [],
+                    "hardcoded_colors": {
+                        "0": {
+                            "type": "hex",
+                            "value": "#ff6c2f",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "1": {
+                            "type": "hex",
+                            "value": "#5d7186",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "2": {
+                            "type": "hex",
+                            "value": "#22c55e",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "3": {
+                            "type": "hex",
+                            "value": "#ef5f5f",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "4": {
+                            "type": "hex",
+                            "value": "#f9b931",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "5": {
+                            "type": "hex",
+                            "value": "#313b5e",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "7": {
+                            "type": "hex",
+                            "value": "#707793",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "8": {
+                            "type": "hex",
+                            "value": "#ffffff",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "9": {
+                            "type": "hex",
+                            "value": "#f9f7f7",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "10": {
+                            "type": "hex",
+                            "value": "#f8f9fa",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "11": {
+                            "type": "hex",
+                            "value": "#eaedf1",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "12": {
+                            "type": "hex",
+                            "value": "#f8d7da",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "13": {
+                            "type": "hex",
+                            "value": "#f5c6cb",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "14": {
+                            "type": "hex",
+                            "value": "#721c24",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "15": {
+                            "type": "hex",
+                            "value": "#d4edda",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "16": {
+                            "type": "hex",
+                            "value": "#c3e6cb",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "17": {
+                            "type": "hex",
+                            "value": "#155724",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "18": {
+                            "type": "hex",
+                            "value": "#fff3cd",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "19": {
+                            "type": "hex",
+                            "value": "#ffeaa7",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "20": {
+                            "type": "hex",
+                            "value": "#856404",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "21": {
+                            "type": "hex",
+                            "value": "#d1ecf1",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "22": {
+                            "type": "hex",
+                            "value": "#bee5eb",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "23": {
+                            "type": "hex",
+                            "value": "#0c5460",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "28": {
+                            "type": "hex",
+                            "value": "#e2e3e5",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "29": {
+                            "type": "hex",
+                            "value": "#383d41",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "31": {
+                            "type": "hex",
+                            "value": "#d95c28",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "34": {
+                            "type": "hex",
+                            "value": "#4a5a6b",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "37": {
+                            "type": "hex",
+                            "value": "#dc3545",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "39": {
+                            "type": "rgb",
+                            "value": "rgba(0, 0, 0, 0.1)",
+                            "suggestion": "Use theme color variable"
+                        },
+                        "40": {
+                            "type": "rgb",
+                            "value": "rgba(255, 108, 47, 0.1)",
+                            "suggestion": "Use theme color variable"
+                        },
+                        "41": {
+                            "type": "named",
+                            "value": "white",
+                            "suggestion": "Use theme color variable"
+                        }
+                    },
+                    "hardcoded_spacing": {
+                        "0": {
+                            "type": "px",
+                            "value": "4px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "1": {
+                            "type": "px",
+                            "value": "8px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "2": {
+                            "type": "px",
+                            "value": "12px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "3": {
+                            "type": "px",
+                            "value": "16px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "4": {
+                            "type": "px",
+                            "value": "24px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "5": {
+                            "type": "px",
+                            "value": "14px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "6": {
+                            "type": "px",
+                            "value": "1200px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "7": {
+                            "type": "px",
+                            "value": "1px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "12": {
+                            "type": "px",
+                            "value": "200px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "15": {
+                            "type": "px",
+                            "value": "3px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "16": {
+                            "type": "px",
+                            "value": "2px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "30": {
+                            "type": "px",
+                            "value": "6px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "34": {
+                            "type": "px",
+                            "value": "300px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "39": {
+                            "type": "px",
+                            "value": "768px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        }
+                    },
+                    "missing_theme_vars": []
+                },
+                "total_variables": 20,
+                "file_size": 10739
+            },
+            {
+                "file": "C:\\xampp\\htdocs\\bespokecabinetry.au\/admin\/components\/savepoints\/assets\/css\/variables.css",
+                "issues": {
+                    "old_format_variables": [],
+                    "hardcoded_colors": [],
+                    "hardcoded_spacing": [],
+                    "missing_theme_vars": []
+                },
+                "total_variables": 0,
+                "file_size": 309
+            }
+        ],
+        "summary": {
+            "total_files": 2,
+            "total_issues": 45,
+            "old_format_count": 0,
+            "hardcoded_colors_count": 31,
+            "hardcoded_spacing_count": 14,
+            "compliance_score": 30.8
+        }
+    },
+    {
+        "component": "seo_manager",
+        "css_prefix": "seo-manager",
+        "files": [
+            {
+                "file": "C:\\xampp\\htdocs\\bespokecabinetry.au\/admin\/components\/seo_manager\/assets\/css\/seo_manager.css",
+                "issues": {
+                    "old_format_variables": [],
+                    "hardcoded_colors": {
+                        "0": {
+                            "type": "hex",
+                            "value": "#007bff",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "2": {
+                            "type": "named",
+                            "value": "white",
+                            "suggestion": "Use theme color variable"
+                        }
+                    },
+                    "hardcoded_spacing": {
+                        "0": {
+                            "type": "px",
+                            "value": "20px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "1": {
+                            "type": "px",
+                            "value": "200px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "5": {
+                            "type": "px",
+                            "value": "4px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "6": {
+                            "type": "px",
+                            "value": "10px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "7": {
+                            "type": "px",
+                            "value": "14px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "8": {
+                            "type": "px",
+                            "value": "32px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "9": {
+                            "type": "px",
+                            "value": "30px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "10": {
+                            "type": "px",
+                            "value": "15px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        }
+                    },
+                    "missing_theme_vars": []
+                },
+                "total_variables": 0,
+                "file_size": 962
+            },
+            {
+                "file": "C:\\xampp\\htdocs\\bespokecabinetry.au\/admin\/components\/seo_manager\/assets\/css\/variables.css",
+                "issues": {
+                    "old_format_variables": [
+                        {
+                            "old": "--sm-color-primary",
+                            "new": "--seo-manager-color-primary",
+                            "value": "var(--color-primary, #007bff)",
+                            "line": 3
+                        },
+                        {
+                            "old": "--sm-color-success",
+                            "new": "--seo-manager-color-success",
+                            "value": "var(--color-success, #28a745)",
+                            "line": 4
+                        },
+                        {
+                            "old": "--sm-color-warning",
+                            "new": "--seo-manager-color-warning",
+                            "value": "var(--color-warning, #ffc107)",
+                            "line": 5
+                        },
+                        {
+                            "old": "--sm-color-danger",
+                            "new": "--seo-manager-color-danger",
+                            "value": "var(--color-danger, #dc3545)",
+                            "line": 6
+                        },
+                        {
+                            "old": "--sm-spacing-sm",
+                            "new": "--seo-manager-spacing-sm",
+                            "value": "var(--spacing-sm, 8px)",
+                            "line": 7
+                        },
+                        {
+                            "old": "--sm-spacing-md",
+                            "new": "--seo-manager-spacing-md",
+                            "value": "var(--spacing-md, 16px)",
+                            "line": 8
+                        },
+                        {
+                            "old": "--sm-spacing-lg",
+                            "new": "--seo-manager-spacing-lg",
+                            "value": "var(--spacing-lg, 24px)",
+                            "line": 9
+                        },
+                        {
+                            "old": "--sm-font-primary",
+                            "new": "--seo-manager-font-primary",
+                            "value": "var(--font-primary, sans-serif)",
+                            "line": 10
+                        },
+                        {
+                            "old": "--sm-border-radius",
+                            "new": "--seo-manager-border-radius",
+                            "value": "var(--border-radius, 4px)",
+                            "line": 11
+                        }
+                    ],
+                    "hardcoded_colors": [
+                        {
+                            "type": "hex",
+                            "value": "#007bff",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#28a745",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#ffc107",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        {
+                            "type": "hex",
+                            "value": "#dc3545",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        }
+                    ],
+                    "hardcoded_spacing": [
+                        {
+                            "type": "px",
+                            "value": "8px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        {
+                            "type": "px",
+                            "value": "16px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        {
+                            "type": "px",
+                            "value": "24px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        {
+                            "type": "px",
+                            "value": "4px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        }
+                    ],
+                    "missing_theme_vars": []
+                },
+                "total_variables": 9,
+                "file_size": 528
+            }
+        ],
+        "summary": {
+            "total_files": 2,
+            "total_issues": 27,
+            "old_format_count": 9,
+            "hardcoded_colors_count": 6,
+            "hardcoded_spacing_count": 12,
+            "compliance_score": 42.6
+        }
+    },
+    {
+        "component": "theme",
+        "css_prefix": "theme",
+        "files": [
+            {
+                "file": "C:\\xampp\\htdocs\\bespokecabinetry.au\/admin\/components\/theme\/assets\/css\/theme.css",
+                "issues": {
+                    "old_format_variables": [],
+                    "hardcoded_colors": {
+                        "0": {
+                            "type": "hex",
+                            "value": "#313B5E",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "1": {
+                            "type": "hex",
+                            "value": "#F9F7F7",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "3": {
+                            "type": "hex",
+                            "value": "#5D7186",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "5": {
+                            "type": "hex",
+                            "value": "#8486A7",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "6": {
+                            "type": "hex",
+                            "value": "#D95C28",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "9": {
+                            "type": "hex",
+                            "value": "#424E5A",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "10": {
+                            "type": "hex",
+                            "value": "#707793",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "12": {
+                            "type": "hex",
+                            "value": "#FFFFFF",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        },
+                        "13": {
+                            "type": "rgb",
+                            "value": "rgba(255, 108, 47, 0.25)",
+                            "suggestion": "Use theme color variable"
+                        }
+                    },
+                    "hardcoded_spacing": {
+                        "0": {
+                            "type": "px",
+                            "value": "14px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "1": {
+                            "type": "px",
+                            "value": "21px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "2": {
+                            "type": "px",
+                            "value": "16px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "4": {
+                            "type": "px",
+                            "value": "12px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "5": {
+                            "type": "px",
+                            "value": "2px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "6": {
+                            "type": "px",
+                            "value": "0px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "7": {
+                            "type": "px",
+                            "value": "576px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "8": {
+                            "type": "px",
+                            "value": "768px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "9": {
+                            "type": "px",
+                            "value": "992px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "10": {
+                            "type": "px",
+                            "value": "1200px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "11": {
+                            "type": "px",
+                            "value": "1400px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        }
+                    },
+                    "missing_theme_vars": []
+                },
+                "total_variables": 0,
+                "file_size": 2649
+            }
+        ],
+        "summary": {
+            "total_files": 1,
+            "total_issues": 20,
+            "old_format_count": 0,
+            "hardcoded_colors_count": 9,
+            "hardcoded_spacing_count": 11,
+            "compliance_score": 33.3
+        }
+    },
+    {
+        "component": "url_routing",
+        "css_prefix": "url-routing",
+        "files": [
+            {
+                "file": "C:\\xampp\\htdocs\\bespokecabinetry.au\/admin\/components\/url_routing\/assets\/css\/url_routing.css",
+                "issues": {
+                    "old_format_variables": [],
+                    "hardcoded_colors": [
+                        {
+                            "type": "hex",
+                            "value": "#6c757d",
+                            "suggestion": "Use theme color variable (--color-primary, --color-secondary, etc.)"
+                        }
+                    ],
+                    "hardcoded_spacing": {
+                        "0": {
+                            "type": "px",
+                            "value": "1200px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "1": {
+                            "type": "px",
+                            "value": "14px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "2": {
+                            "type": "px",
+                            "value": "5px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        },
+                        "5": {
+                            "type": "px",
+                            "value": "12px",
+                            "suggestion": "Use theme spacing variable (--spacing-xs, --spacing-sm, etc.)"
+                        }
+                    },
+                    "missing_theme_vars": []
+                },
+                "total_variables": 0,
+                "file_size": 538
+            },
+            {
+                "file": "C:\\xampp\\htdocs\\bespokecabinetry.au\/admin\/components\/url_routing\/assets\/css\/variables.css",
+                "issues": {
+                    "old_format_variables": [],
+                    "hardcoded_colors": [],
+                    "hardcoded_spacing": [],
+                    "missing_theme_vars": []
+                },
+                "total_variables": 0,
+                "file_size": 116
+            }
+        ],
+        "summary": {
+            "total_files": 2,
+            "total_issues": 5,
+            "old_format_count": 0,
+            "hardcoded_colors_count": 1,
+            "hardcoded_spacing_count": 4,
+            "compliance_score": 80
+        }
+    }
+] [];
+        
+        // Set generated date
+        document.getElementById('generated-date').textContent = new Date().toLocaleString();
+        
+        // Calculate summary statistics
+        function calculateSummary(data) {
+            let totalComponents = data.length;
+            let totalIssues = 0;
+            let totalOldFormat = 0;
+            let totalHardcodedColors = 0;
+            let totalHardcodedSpacing = 0;
+            let totalScore = 0;
+            let compliantComponents = 0;
+            
+            data.forEach(component => {
+                totalIssues += component.summary.total_issues;
+                totalOldFormat += component.summary.old_format_count;
+                totalHardcodedColors += component.summary.hardcoded_colors_count;
+                totalHardcodedSpacing += component.summary.hardcoded_spacing_count;
+                totalScore += component.summary.compliance_score;
+                if (component.summary.compliance_score >= 70) {
+                    compliantComponents++;
+                }
+            });
+            
+            const avgScore = totalComponents > 0 ? (totalScore / totalComponents).toFixed(1) : 0;
+            const complianceRate = totalComponents > 0 ? ((compliantComponents / totalComponents) * 100).toFixed(1) : 0;
+            
+            return {
+                totalComponents,
+                totalIssues,
+                totalOldFormat,
+                totalHardcodedColors,
+                totalHardcodedSpacing,
+                avgScore,
+                complianceRate,
+                compliantComponents
+            };
+        }
+        
+        // Render summary
+        function renderSummary(data) {
+            const summary = calculateSummary(data);
+            const summaryDiv = document.getElementById('summary');
+            
+            summaryDiv.innerHTML = `
+                <div class="summary-card ${summary.avgScore >= 70 ? 'success' : summary.avgScore >= 50 ? 'warning' : 'danger'}">
+                    <h3>Average Compliance</h3>
+                    <div class="value">${summary.avgScore}%</div>
+                </div>
+                <div class="summary-card">
+                    <h3>Components Scanned</h3>
+                    <div class="value">${summary.totalComponents}</div>
+                </div>
+                <div class="summary-card ${summary.complianceRate >= 70 ? 'success' : 'warning'}">
+                    <h3>Compliant Components</h3>
+                    <div class="value">${summary.compliantComponents}/${summary.totalComponents}</div>
+                    <div style="font-size: 0.8em; margin-top: 5px;">${summary.complianceRate}%</div>
+                </div>
+                <div class="summary-card ${summary.totalIssues === 0 ? 'success' : 'warning'}">
+                    <h3>Total Issues</h3>
+                    <div class="value">${summary.totalIssues}</div>
+                </div>
+                <div class="summary-card">
+                    <h3>Old Format Variables</h3>
+                    <div class="value">${summary.totalOldFormat}</div>
+                </div>
+                <div class="summary-card">
+                    <h3>Hardcoded Colors</h3>
+                    <div class="value">${summary.totalHardcodedColors}</div>
+                </div>
+                <div class="summary-card">
+                    <h3>Hardcoded Spacing</h3>
+                    <div class="value">${summary.totalHardcodedSpacing}</div>
+                </div>
+            `;
+        }
+        
+        // Render component
+        function renderComponent(component) {
+            const score = component.summary.compliance_score;
+            const scoreClass = score >= 70 ? 'high' : score >= 50 ? 'medium' : 'low';
+            
+            let filesHTML = '';
+            
+            component.files.forEach(file => {
+                const fileIssues = 
+                    file.issues.old_format_variables.length +
+                    file.issues.hardcoded_colors.length +
+                    file.issues.hardcoded_spacing.length;
+                
+                if (fileIssues === 0) {
+                    filesHTML += `
+                        <div class="file">
+                            <div class="file-header">${file.file.split('/').pop()}</div>
+                            <div class="no-issues">No issues found</div>
+                        </div>
+                    `;
+                } else {
+                    let issuesHTML = '';
+                    
+                    // Old format variables
+                    if (file.issues.old_format_variables.length > 0) {
+                        issuesHTML += `
+                            <div class="issue-group">
+                                <div class="issue-group-title">
+                                    ⚠️ Old Format Variables (${file.issues.old_format_variables.length})
+                                </div>
+                                ${file.issues.old_format_variables.map(v => `
+                                    <div class="issue-item old-format">
+                                        <code class="old-var">${v.old}</code> → 
+                                        <code class="new-var">${v.new}</code>
+                                        <div style="font-size: 0.85em; color: #666; margin-top: 5px;">
+                                            Value: ${v.value} (Line ${v.line})
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                    }
+                    
+                    // Hardcoded colors
+                    if (file.issues.hardcoded_colors.length > 0) {
+                        const uniqueColors = [...new Set(file.issues.hardcoded_colors.map(c => c.value))];
+                        issuesHTML += `
+                            <div class="issue-group">
+                                <div class="issue-group-title">
+                                    🎨 Hardcoded Colors (${file.issues.hardcoded_colors.length} found)
+                                </div>
+                                ${uniqueColors.slice(0, 10).map(color => `
+                                    <div class="issue-item hardcoded">
+                                        <code>${color}</code> - Use theme color variable
+                                    </div>
+                                `).join('')}
+                                ${uniqueColors.length > 10 ? `<div style="color: #666; font-size: 0.9em; padding: 5px;">... and ${uniqueColors.length - 10} more</div>` : ''}
+                            </div>
+                        `;
+                    }
+                    
+                    // Hardcoded spacing
+                    if (file.issues.hardcoded_spacing.length > 0) {
+                        const uniqueSpacing = [...new Set(file.issues.hardcoded_spacing.map(s => s.value))];
+                        issuesHTML += `
+                            <div class="issue-group">
+                                <div class="issue-group-title">
+                                    📏 Hardcoded Spacing (${file.issues.hardcoded_spacing.length} found)
+                                </div>
+                                ${uniqueSpacing.slice(0, 10).map(spacing => `
+                                    <div class="issue-item hardcoded">
+                                        <code>${spacing}</code> - Use theme spacing variable
+                                    </div>
+                                `).join('')}
+                                ${uniqueSpacing.length > 10 ? `<div style="color: #666; font-size: 0.9em; padding: 5px;">... and ${uniqueSpacing.length - 10} more</div>` : ''}
+                            </div>
+                        `;
+                    }
+                    
+                    filesHTML += `
+                        <div class="file">
+                            <div class="file-header">${file.file.split('/').pop()}</div>
+                            <div class="issues">${issuesHTML}</div>
+                        </div>
+                    `;
+                }
+            });
+            
+            return `
+                <div class="component">
+                    <div class="component-header">
+                        <div class="component-name">${component.component}</div>
+                        <div class="score-badge ${scoreClass}">${score}%</div>
+                    </div>
+                    <div class="component-info">
+                        <div class="info-item">
+                            <strong>CSS Prefix</strong>
+                            <div class="value">--${component.css_prefix}-*</div>
+                        </div>
+                        <div class="info-item">
+                            <strong>CSS Files</strong>
+                            <div class="value">${component.summary.total_files}</div>
+                        </div>
+                        <div class="info-item">
+                            <strong>Total Issues</strong>
+                            <div class="value">${component.summary.total_issues}</div>
+                        </div>
+                        <div class="info-item">
+                            <strong>Old Format</strong>
+                            <div class="value">${component.summary.old_format_count}</div>
+                        </div>
+                        <div class="info-item">
+                            <strong>Hardcoded Colors</strong>
+                            <div class="value">${component.summary.hardcoded_colors_count}</div>
+                        </div>
+                        <div class="info-item">
+                            <strong>Hardcoded Spacing</strong>
+                            <div class="value">${component.summary.hardcoded_spacing_count}</div>
+                        </div>
+                    </div>
+                    ${filesHTML}
+                </div>
+            `;
+        }
+        
+        // Render all components
+        function renderComponents(data) {
+            const componentsDiv = document.getElementById('components');
+            componentsDiv.innerHTML = data.map(component => renderComponent(component)).join('');
+        }
+        
+        // Initialize
+        if (auditData && auditData.length > 0) {
+            renderSummary(auditData);
+            renderComponents(auditData);
+        } else {
+            document.getElementById('summary').innerHTML = '<p>No audit data available. Run the CSS audit tool first.</p>';
+            document.getElementById('components').innerHTML = '<p>No components found.</p>';
+        }
+    </script>
+</body>
+</html>
+

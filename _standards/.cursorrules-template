@@ -1,0 +1,66 @@
+# Cursor Rules - Development Standards
+
+## Required Documentation References
+
+**ALWAYS reference these documents when creating or modifying code:**
+
+1. **Component Creation Procedure**: `_standards/COMPONENT_CREATION_PROCEDURE.md` or `admin/components/COMPONENT_CREATION_PROCEDURE.md`
+2. **Naming Standards**: `_standards/NAMING_STANDARDS.md` or `admin/components/NAMING_STANDARDS.md`
+
+**These apply to:**
+- ✅ Component development
+- ✅ Standalone page development  
+- ✅ All PHP, CSS, JavaScript, and database code
+- ✅ All files in this project
+
+---
+
+## Universal Naming Rules (All Code)
+
+### Files
+- **PHP**: `lowercase_with_underscores.php`
+- **CSS**: `{name}.css`
+- **JavaScript**: `{name}.js`
+- **Markdown**: `UPPERCASE_WITH_UNDERSCORES.md`
+
+### Functions
+- **Format**: `{prefix}_{action}_{object}()`
+- **Component**: `{component}_{action}_{object}()`
+- **Standalone Page**: `{page}_{action}_{object}()`
+
+### Variables
+- **PHP**: `$lowercase_with_underscores`
+- **CSS Theme**: `--{category}-{property}`
+- **CSS Component/Page**: `--{component_name}-{property}` (convert underscores to hyphens, only if truly specific)
+- **JavaScript**: `camelCase`
+
+### Database
+- **Tables**: `{prefix}_{table_name}`
+- **Columns**: `lowercase_with_underscores`
+
+### CSS Classes
+- **Format**: `{prefix}__{element}--{modifier}` (BEM-like)
+
+---
+
+## CSS Standards (All Code)
+
+- **NO hardcoded colors** - Use: `var(--color-primary)`
+- **NO hardcoded spacing** - Use: `var(--spacing-lg)`
+- Use theme variables when available
+- Minimum 70% compliance score required
+
+---
+
+## Code Quality (All Code)
+
+- Use prepared statements for ALL database queries
+- Validate all user input
+- Sanitize all output
+- Handle errors gracefully
+
+---
+
+**Standards Location**: `_standards/` folder  
+**Last Updated**: 2025-01-27
+

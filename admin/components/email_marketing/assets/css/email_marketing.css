@@ -1,0 +1,49 @@
+/**
+ * Email Marketing Component Styles
+ */
+
+.email-marketing-container {
+    font-family: var(--font-family);
+    padding: var(--spacing-md);
+}
+
+.email-marketing-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+    box-shadow: var(--shadow-default);
+}
+
+.email-marketing-button {
+    background: var(--color-primary);
+    color: var(--text-on-primary);
+    border: none;
+    padding: var(--spacing-button-py) var(--spacing-button-px);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: var(--font-size-base);
+    transition: background var(--transition-default);
+}
+
+.email-marketing-button:hover {
+    opacity: 0.9;
+}
+
+.email-marketing-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.email-marketing-table th,
+.email-marketing-table td {
+    padding: var(--spacing-table-cell-vertical) var(--spacing-table-cell-horizontal);
+    text-align: left;
+    border-bottom: var(--border-width) solid var(--border-default);
+}
+
+.email-marketing-table th {
+    background: var(--bg-hover);
+    font-weight: var(--font-weight-semibold);
+}
+

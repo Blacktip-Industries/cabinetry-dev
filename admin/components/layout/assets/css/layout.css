@@ -1,0 +1,225 @@
+/* Layout Component CSS - Header, Sidebar, Footer, and Main Layout Styles */
+
+/* Admin Layout Structure - CSS Grid */
+.admin-layout {
+    display: grid;
+    grid-template-areas: 
+        "menu header"
+        "menu body"
+        "menu footer";
+    grid-template-columns: var(--menu-system-menu-width, 280px) 1fr;
+    grid-template-rows: var(--header-height, 100px) minmax(0, 1fr) auto;
+    min-height: 100vh;
+    background-color: var(--bg-body);
+}
+
+/* Header Styles */
+.admin-header {
+    grid-area: header;
+    height: var(--header-height, 100px);
+    background-color: var(--bg-topbar);
+    z-index: var(--z-index-sticky);
+    border-bottom: var(--border-width) solid var(--border-default);
+    transition: all var(--transition-default);
+}
+
+/* Sidebar Styles */
+.admin-sidebar {
+    grid-area: menu;
+    width: var(--menu-system-menu-width, 280px);
+    background-color: var(--bg-sidebar);
+    min-height: 0;
+    height: 100%;
+    overflow-y: auto;
+    z-index: var(--z-index-dropdown);
+    transition: all var(--transition-default);
+}
+
+/* Main Content Area */
+.admin-main {
+    grid-area: body;
+    width: 100%;
+    min-height: 0;
+    transition: all var(--transition-default);
+    box-sizing: border-box;
+    overflow-y: visible;
+}
+
+.admin-content {
+    padding: var(--spacing-xl);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Dynamic column grid for page content */
+.admin-content-grid {
+    display: grid;
+    gap: var(--spacing-lg);
+    width: 100%;
+}
+
+.admin-content-grid[data-columns="1"] {
+    grid-template-columns: 1fr;
+}
+
+.admin-content-grid[data-columns="2"] {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.admin-content-grid[data-columns="3"] {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.admin-content-grid[data-columns="4"] {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.admin-content-grid[data-columns="5"] {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.admin-content-grid[data-columns="6"] {
+    grid-template-columns: repeat(6, 1fr);
+}
+
+/* Footer Styles */
+.admin-footer {
+    grid-area: footer;
+    min-height: var(--footer-height, 60px);
+    background-color: var(--bg-card);
+    border-top: var(--border-width) solid var(--border-default);
+    transition: all var(--transition-default);
+}
+
+/* Placeholder Styles for Missing Components */
+.layout-placeholder {
+    background-color: var(--bg-hover);
+    border: var(--border-width-thick) dashed var(--border-default);
+    padding: var(--spacing-lg);
+    text-align: center;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
+}
+
+.layout-placeholder--header {
+    grid-area: header;
+    min-height: var(--header-height, 100px);
+}
+
+.layout-placeholder--menu {
+    grid-area: menu;
+    width: var(--menu-system-menu-width, 280px);
+}
+
+.layout-placeholder--footer {
+    grid-area: footer;
+    min-height: var(--footer-height, 60px);
+}
+
+.layout-placeholder__content {
+    width: 100%;
+}
+
+.layout-placeholder__message {
+    margin: 0;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+}
+
+.layout-placeholder__message code {
+    background-color: var(--bg-card);
+    padding: var(--spacing-xs) var(--spacing-xs);
+    border-radius: var(--radius-sm);
+    font-family: 'Courier New', monospace;
+    font-size: var(--font-size-small);
+    color: var(--text-primary);
+}
+
+/* Responsive Styles */
+@media (max-width: var(--breakpoint-lg)) {
+    .admin-layout {
+        grid-template-areas: 
+            "header"
+            "body"
+            "footer";
+        grid-template-columns: 1fr;
+        grid-template-rows: var(--header-height, 100px) 1fr auto;
+    }
+    
+    .admin-sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        width: var(--menu-system-menu-width, 280px);
+        transform: translateX(-100%);
+        z-index: var(--z-index-modal);
+    }
+    
+    .admin-sidebar.show {
+        transform: translateX(0);
+    }
+    
+    .layout-placeholder--menu {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        width: var(--menu-system-menu-width, 280px);
+        transform: translateX(-100%);
+        z-index: var(--z-index-modal);
+    }
+    
+    .admin-content-grid[data-columns] {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: var(--breakpoint-md)) {
+    .admin-layout {
+        grid-template-rows: 80px 1fr auto;
+    }
+    
+    .admin-header {
+        height: 80px;
+    }
+    
+    .layout-placeholder--header {
+        min-height: 80px;
+    }
+    
+    .admin-content {
+        padding: var(--spacing-lg);
+    }
+    
+    .layout-placeholder {
+        padding: var(--spacing-md);
+    }
+    
+    .layout-placeholder__message {
+        font-size: var(--font-size-small);
+    }
+}
+
+/* Sidebar Collapsed State (for future enhancement) */
+.admin-sidebar.collapsed {
+    width: var(--menu-system-menu-width-collapsed, 75px);
+}
+
+.admin-sidebar.collapsed .admin-sidebar__text {
+    display: none;
+}
+
+.admin-sidebar.collapsed .admin-sidebar__link {
+    justify-content: center;
+    padding: var(--spacing-sm);
+}
+
+.admin-sidebar.collapsed .admin-sidebar__icon {
+    margin-right: 0;
+}
+
